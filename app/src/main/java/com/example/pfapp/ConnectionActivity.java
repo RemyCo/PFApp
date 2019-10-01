@@ -42,13 +42,16 @@ public class ConnectionActivity extends AppCompatActivity {
                 boolean connected = ConnectToServer(username, password);
                 if (connected) {
                     Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
+                    startActivity(intent);
                 }
+                Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
 
 
-    boolean ConnectToServer(EditText username, EditText password){
+    boolean ConnectToServer(final EditText username, final EditText password){
         final TextView request = (TextView)findViewById(R.id.request);
         String url ="https://192.168.4.240/pfe/webservice.php?q=LOGON&user=vallovic&pass=6r654tgiKhxt";
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -65,7 +68,7 @@ public class ConnectionActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("blabla", "Not Working");
-                request.setText("That didn't work!");
+                request.setText("That didn't work! " + username.getText() + "  " + password.getText());
             }
         });
 
