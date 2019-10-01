@@ -2,6 +2,8 @@ package com.example.pfapp;
 
 import android.app.AlertDialog;
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +22,9 @@ import org.json.JSONObject;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -29,35 +34,290 @@ import javax.net.ssl.X509TrustManager;
 
 public abstract class PostMan extends Application {
 
-    private static boolean bool = false;
     private static String responseServer = "";
 
-    public static boolean ConnectToServer(final EditText username, final EditText password, RequestQueue queue) {
+
+    /**
+     * LOGON Request
+     * @param username
+     * @param password
+     * @param context
+     * @return
+     */
+    public static boolean ConnectToServer(final EditText username, final EditText password, Context context) {
         String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
+        boolean connected = false;
         try {
             JSONObject jsonObj = new JSONObject(response);
-            Log.d("blabla", jsonObj.toString());
             if  (!jsonObj.has("error")){
                 String token = jsonObj.getString("token");
-                Log.d("blabla", token);
-                bool = true;
+                SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", 0);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("username", "" + username.getText()); // Storing username
+                editor.putString("token", token); // Storing token
+                editor.apply();
+                connected = true;
             } else {
-                bool = false;
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
-        return bool;
+        return connected;
+    }
+
+    /**
+     * LIPRJ Request
+     * @param username
+     * @param password
+     * @param context
+     * @return
+     */
+    public static List ListofAllProjects(final EditText username, final EditText password, Context context) {
+        List list = new ArrayList();
+        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String response = GetRequest(url, queue);
+        try {
+            JSONObject jsonObj = new JSONObject(response);
+            if  (!jsonObj.has("error")){
+
+            } else {
+                Log.d("blabla", "Error on Credentials");
+            }
+        } catch (JSONException e) {
+            Log.d("blabla", "JSONException Error :" + e.getMessage());
+        }
+        return list;
     }
 
 
-    private static String GetRequest(String url, RequestQueue queue){
+    /**
+     * MYPRJ Request
+     * @param username
+     * @param password
+     * @param context
+     * @return
+     */
+    public static List ListofAllProjectsUser(final EditText username, final EditText password, Context context) {
+        List list = new ArrayList();
+        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String response = GetRequest(url, queue);
+        try {
+            JSONObject jsonObj = new JSONObject(response);
+            if  (!jsonObj.has("error")){
 
+            } else {
+                Log.d("blabla", "Error on Credentials");
+            }
+        } catch (JSONException e) {
+            Log.d("blabla", "JSONException Error :" + e.getMessage());
+        }
+        return list;
+    }
+
+    /**
+     * LIJUR Request
+     * @param username
+     * @param password
+     * @param context
+     * @return
+     */
+    public static List ListofAllJuries(final EditText username, final EditText password, Context context) {
+        List list = new ArrayList();
+        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String response = GetRequest(url, queue);
+        try {
+            JSONObject jsonObj = new JSONObject(response);
+            if  (!jsonObj.has("error")){
+
+            } else {
+                Log.d("blabla", "Error on Credentials");
+            }
+        } catch (JSONException e) {
+            Log.d("blabla", "JSONException Error :" + e.getMessage());
+        }
+        return list;
+    }
+
+
+    /**
+     * MYJUR Request
+     * @param username
+     * @param password
+     * @param context
+     * @return
+     */
+    public static List ListofAllProjectsJuriesUser(final EditText username, final EditText password, Context context) {
+        List list = new ArrayList();
+        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String response = GetRequest(url, queue);
+        try {
+            JSONObject jsonObj = new JSONObject(response);
+            if  (!jsonObj.has("error")){
+
+            } else {
+                Log.d("blabla", "Error on Credentials");
+            }
+        } catch (JSONException e) {
+            Log.d("blabla", "JSONException Error :" + e.getMessage());
+        }
+        return list;
+    }
+
+
+    /**
+     * JYINF Request
+     * @param username
+     * @param password
+     * @param context
+     * @return
+     */
+    public static List ListofAllJuryMember(final EditText username, final EditText password, Context context) {
+        List list = new ArrayList();
+        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String response = GetRequest(url, queue);
+        try {
+            JSONObject jsonObj = new JSONObject(response);
+            if  (!jsonObj.has("error")){
+
+            } else {
+                Log.d("blabla", "Error on Credentials");
+            }
+        } catch (JSONException e) {
+            Log.d("blabla", "JSONException Error :" + e.getMessage());
+        }
+        return list;
+    }
+
+
+
+    /**
+     * POSTR Request
+     * @param username
+     * @param password
+     * @param context
+     * @return
+     */
+    public static boolean poster (final EditText username, final EditText password, Context context) {
+        List list = new ArrayList();
+        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String response = GetRequest(url, queue);
+        try {
+            JSONObject jsonObj = new JSONObject(response);
+            if  (!jsonObj.has("error")){
+
+            } else {
+                Log.d("blabla", "Error on Credentials");
+            }
+        } catch (JSONException e) {
+            Log.d("blabla", "JSONException Error :" + e.getMessage());
+        }
+        return true;
+    }
+
+
+    /**
+     * NOTES Request
+     * @param username
+     * @param password
+     * @param context
+     * @return
+     */
+    public static List ListofNotesProjectMember(final EditText username, final EditText password, Context context) {
+        List list = new ArrayList();
+        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String response = GetRequest(url, queue);
+        try {
+            JSONObject jsonObj = new JSONObject(response);
+            if  (!jsonObj.has("error")){
+
+            } else {
+                Log.d("blabla", "Error on Credentials");
+            }
+        } catch (JSONException e) {
+            Log.d("blabla", "JSONException Error :" + e.getMessage());
+        }
+        return list;
+    }
+
+
+    /**
+     * NEWNT Request
+     * @param username
+     * @param password
+     * @param context
+     * @return
+     */
+    public static boolean UpdateNote(final EditText username, final EditText password, Context context) {
+        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String response = GetRequest(url, queue);
+        try {
+            JSONObject jsonObj = new JSONObject(response);
+            if  (!jsonObj.has("error")){
+
+            } else {
+                Log.d("blabla", "Error on Credentials");
+            }
+        } catch (JSONException e) {
+            Log.d("blabla", "JSONException Error :" + e.getMessage());
+        }
+        return true;
+    }
+
+
+    /**
+     * PORTE Request
+     * @param username
+     * @param password
+     * @param context
+     * @return
+     */
+    public static List RandomProjects(final EditText username, final EditText password, Context context) {
+        List list = new ArrayList();
+        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String response = GetRequest(url, queue);
+        try {
+            JSONObject jsonObj = new JSONObject(response);
+            if  (!jsonObj.has("error")){
+
+            } else {
+                Log.d("blabla", "Error on Credentials");
+            }
+        } catch (JSONException e) {
+            Log.d("blabla", "JSONException Error :" + e.getMessage());
+        }
+        return list;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private static String GetRequest(String url, RequestQueue queue){
         //TODO: Absolutely change that (because it's a very important security issue) :
         trustEveryone();
-
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -65,7 +325,6 @@ public abstract class PostMan extends Application {
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         responseServer = response;
-                        bool = true;
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -76,11 +335,8 @@ public abstract class PostMan extends Application {
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
         return responseServer;
     }
-
-
 
 
     private static void trustEveryone() {
