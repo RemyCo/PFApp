@@ -7,15 +7,19 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
+    <string name="menu_liste_projet">Liste des projets</string>
+    <string name="menu_mes_projet">Mes Projets</string>
+    <string name="menu_agenda">Agenda</string>
+    <string name="menu_plan">Plan</string>
+    <string name="menu_accueil">Accueil</string>
     <string name="menu_send">Send</string>
     <string name="name">Username</string>
     <string name="connect">Connect</string>
     <string name="password">Password</string>
+    <string name="eseo">ESEO</string>
+    <string name="titre_poster">Posters en attentes :</string>
+    <string name="titre_agenda">Agenda :</string>
     <string name="error_credentials">Error Credentials</string>
     <string name="error_credentials_explication">Credentials that have been entered are wrong. Please check out.</string>
+
 </resources>

@@ -5,4 +5,8 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="titre">40dp</dimen>
+    <dimen name="poster_accueil">400dp</dimen>
+    <dimen name="titre_taille">30dp</dimen>
+    <dimen name="titre_projet">100dp</dimen>
 </resources>
