@@ -1,12 +1,10 @@
 package com.example.pfapp;
 
-import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,7 +13,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,7 +20,6 @@ import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.net.ssl.HostnameVerifier;
@@ -35,17 +31,17 @@ import javax.net.ssl.X509TrustManager;
 public abstract class PostMan extends Application {
 
     private static String responseServer = "";
-
+    private static String IP = "192.168.4.240";
 
     /**
      * LOGON Request
-     * @param username
-     * @param password
-     * @param context
-     * @return
+     * @param username : The username of a user
+     * @param password : The password of the user
+     * @param context : The context of the application
+     * @return true if connected, false otherwise
      */
     public static boolean ConnectToServer(final EditText username, final EditText password, Context context) {
-        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        String url = "https://" + IP + "/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         boolean connected = false;
@@ -70,14 +66,14 @@ public abstract class PostMan extends Application {
 
     /**
      * LIPRJ Request
-     * @param username
-     * @param password
-     * @param context
-     * @return
+     * @param context : context of the application
+     * @return List of all projects
      */
-    public static List ListofAllProjects(final EditText username, final EditText password, Context context) {
+    public static List ListofAllProjects(Context context) {
         List list = new ArrayList();
-        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        String username = GetSharedPreferences("username", context);
+        String token = GetSharedPreferences("token", context);
+        String url = "https://" + IP + "/pfe/webservice.php?q=LIPRJ&user=" + username + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
@@ -96,14 +92,14 @@ public abstract class PostMan extends Application {
 
     /**
      * MYPRJ Request
-     * @param username
-     * @param password
-     * @param context
-     * @return
+     * @param context : context of the application
+     * @return a list of all the projects where the user is the supervisor
      */
-    public static List ListofAllProjectsUser(final EditText username, final EditText password, Context context) {
+    public static List ListofAllProjectsUser(Context context) {
         List list = new ArrayList();
-        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        String username = GetSharedPreferences("username", context);
+        String token = GetSharedPreferences("token", context);
+        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
@@ -121,14 +117,14 @@ public abstract class PostMan extends Application {
 
     /**
      * LIJUR Request
-     * @param username
-     * @param password
-     * @param context
-     * @return
+     * @param context : context of the application
+     * @return a list of all the juries
      */
-    public static List ListofAllJuries(final EditText username, final EditText password, Context context) {
+    public static List ListofAllJuries(Context context) {
         List list = new ArrayList();
-        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        String username = GetSharedPreferences("username", context);
+        String token = GetSharedPreferences("token", context);
+        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
@@ -147,14 +143,14 @@ public abstract class PostMan extends Application {
 
     /**
      * MYJUR Request
-     * @param username
-     * @param password
-     * @param context
-     * @return
+     * @param context : context of the application
+     * @return a list of all the juries where the user is a member of the jury
      */
-    public static List ListofAllProjectsJuriesUser(final EditText username, final EditText password, Context context) {
+    public static List ListofAllProjectsJuriesUser(Context context) {
         List list = new ArrayList();
-        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        String username = GetSharedPreferences("username", context);
+        String token = GetSharedPreferences("token", context);
+        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
@@ -173,14 +169,14 @@ public abstract class PostMan extends Application {
 
     /**
      * JYINF Request
-     * @param username
-     * @param password
-     * @param context
-     * @return
+     * @param context : context of the application
+     * @return a list of all the projects which are assessed by the Jury if and only if the identified user is a member of the jury
      */
-    public static List ListofAllJuryMember(final EditText username, final EditText password, Context context) {
+    public static List ListofAllJuryMember(Context context) {
         List list = new ArrayList();
-        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        String username = GetSharedPreferences("username", context);
+        String token = GetSharedPreferences("token", context);
+        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
@@ -200,14 +196,14 @@ public abstract class PostMan extends Application {
 
     /**
      * POSTR Request
-     * @param username
-     * @param password
-     * @param context
-     * @return
+     * @param context : context of the application
+     * @return a PNG image of the poste
      */
-    public static boolean poster (final EditText username, final EditText password, Context context) {
+    public static boolean poster (Context context) {
         List list = new ArrayList();
-        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        String username = GetSharedPreferences("username", context);
+        String token = GetSharedPreferences("token", context);
+        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
@@ -226,14 +222,14 @@ public abstract class PostMan extends Application {
 
     /**
      * NOTES Request
-     * @param username
-     * @param password
-     * @param context
-     * @return
+     * @param context : context of the application
+     * @return a list of the team members for the given project, with their average note and the note given by the given user
      */
-    public static List ListofNotesProjectMember(final EditText username, final EditText password, Context context) {
+    public static List ListofNotesProjectMember(Context context) {
         List list = new ArrayList();
-        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        String username = GetSharedPreferences("username", context);
+        String token = GetSharedPreferences("token", context);
+        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
@@ -252,18 +248,18 @@ public abstract class PostMan extends Application {
 
     /**
      * NEWNT Request
-     * @param username
-     * @param password
-     * @param context
-     * @return
+     * @param context : context of the application
+     * @return true if the note have been change on the website
      */
-    public static boolean UpdateNote(final EditText username, final EditText password, Context context) {
-        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+    public static boolean UpdateNote(Context context) {
+        String username = GetSharedPreferences("username", context);
+        String token = GetSharedPreferences("token", context);
+        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
-            if  (!jsonObj.has("error")){
+            if (!jsonObj.has("error")){
 
             } else {
                 Log.d("blabla", "Error on Credentials");
@@ -277,14 +273,14 @@ public abstract class PostMan extends Application {
 
     /**
      * PORTE Request
-     * @param username
-     * @param password
-     * @param context
-     * @return
+     * @param context : context of the application
+     * @return a list of up to five maximum random, non confidential projects that have a poster
      */
-    public static List RandomProjects(final EditText username, final EditText password, Context context) {
+    public static List RandomProjects(Context context) {
         List list = new ArrayList();
-        String url = "https://192.168.4.240/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
+        String username = GetSharedPreferences("username", context);
+        String token = GetSharedPreferences("token", context);
+        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
@@ -308,11 +304,14 @@ public abstract class PostMan extends Application {
 
 
 
-
-
-
-
-
+    private static String GetSharedPreferences (String GetSharedPref, Context context){
+        String mySharePreferenceThing = "";
+        SharedPreferences sharedpreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        if (sharedpreferences.contains(GetSharedPref)) {
+            mySharePreferenceThing = sharedpreferences.getString("username", "");
+        }
+        return mySharePreferenceThing;
+    }
 
 
     private static String GetRequest(String url, RequestQueue queue){
