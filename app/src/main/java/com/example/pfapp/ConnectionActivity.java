@@ -52,8 +52,6 @@ public class ConnectionActivity extends AppCompatActivity {
                 } else {
                     showAlertDialogButtonClicked(findViewById(android.R.id.content));
                 }
-                Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
-                startActivity(intent);
             }
         });
     }
