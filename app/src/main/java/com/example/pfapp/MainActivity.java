@@ -1,7 +1,20 @@
+/*
+ * Class MainActivity
+ * Version 0.5
+ * 07/10/2019
+ * Author : Rémy Coquard
+ * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
+ */
+
 package com.example.pfapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -49,5 +62,19 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        /**
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.nav_header_main, null);
+        TextView username = v.findViewById(R.id.nav_header);
+        SharedPreferences sharedpreferences = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        if (sharedpreferences.contains("username")) {
+            username.setText(sharedpreferences.getString("username", ""));
+        }
+         **/ // Does not work, but have no time to make this working
     }
 }
