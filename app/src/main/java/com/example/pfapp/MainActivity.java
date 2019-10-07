@@ -1,3 +1,11 @@
+/*
+ * Class MainActivity
+ * Version 0.5
+ * 07/10/2019
+ * Author : Rémy Coquard
+ * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
+ */
+
 package com.example.pfapp;
 
 import android.content.Context;

@@ -1,3 +1,11 @@
+/*
+ * Class PostMan
+ * Version 0.5
+ * 07/10/2019
+ * Author : Rémy Coquard
+ * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
+ */
+
 package com.example.pfapp;
 
 import android.app.Application;
@@ -79,7 +87,7 @@ public abstract class PostMan extends Application {
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-
+                //TODO: Developp here LIPRJ Request
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
@@ -105,7 +113,7 @@ public abstract class PostMan extends Application {
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-
+                //TODO: Developp here MYPRJ Request
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
@@ -124,13 +132,13 @@ public abstract class PostMan extends Application {
         List list = new ArrayList();
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
-        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
+        String url = "https://" + IP + "/pfe/webservice.php?q=LIJUR&user=" + username + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-
+                //TODO: Developp here LIJUR Request
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
@@ -150,13 +158,13 @@ public abstract class PostMan extends Application {
         List list = new ArrayList();
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
-        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
+        String url = "https://" + IP + "/pfe/webservice.php?q=MYJUR&user=" + username + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-
+                //TODO: Developp here MYJUR Request
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
@@ -172,17 +180,17 @@ public abstract class PostMan extends Application {
      * @param context : context of the application
      * @return a list of all the projects which are assessed by the Jury if and only if the identified user is a member of the jury
      */
-    public static List ListofAllJuryMember(Context context) {
+    public static List ListofAllJuryMember(Context context, int jury) {
         List list = new ArrayList();
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
-        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
+        String url = "https://" + IP + "/pfe/webservice.php?q=JYINF&user=" + username + "&jury=" + jury  + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-
+                //TODO: Developp here JYINF Request
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
@@ -192,24 +200,37 @@ public abstract class PostMan extends Application {
         return list;
     }
 
-
+    protected enum posterSize {FULL, THUMB, FLB64, THB64};
 
     /**
      * POSTR Request
      * @param context : context of the application
-     * @return a PNG image of the poste
+     * @param proj : id of the project
+     * @return a PNG image of the poster
      */
-    public static boolean poster (Context context) {
+    public static boolean poster (Context context, int proj) {
+        return poster(context, proj, posterSize.FULL);
+    }
+
+    /**
+     * POSTR Request
+     * @param context : context of the application
+     * @param proj : id of the project
+     * @param style : Size of the image
+     * @return a PNG image of the poster
+     */
+    public static boolean poster (Context context, int proj, posterSize style) {
         List list = new ArrayList();
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
-        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
+        String url = "https://" + IP + "/pfe/webservice.php?q=POSTR&user=" + username + "&proj=" +
+                proj + "&style=" + style + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-
+                //TODO: Developp here POSTR Request
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
@@ -223,19 +244,20 @@ public abstract class PostMan extends Application {
     /**
      * NOTES Request
      * @param context : context of the application
+     * @param proj : id of the project
      * @return a list of the team members for the given project, with their average note and the note given by the given user
      */
-    public static List ListofNotesProjectMember(Context context) {
+    public static List ListofNotesProjectMember(Context context, int proj) {
         List list = new ArrayList();
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
-        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
+        String url = "https://" + IP + "/pfe/webservice.php?q=NOTES&user=" + username + "&proj=" + proj + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-
+                //TODO: Developp here NOTES Request
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
@@ -249,18 +271,22 @@ public abstract class PostMan extends Application {
     /**
      * NEWNT Request
      * @param context : context of the application
+     * @param proj : id of the project
+     * @param student : id of the student
+     * @param note : note that would be given to the student
      * @return true if the note have been change on the website
      */
-    public static boolean UpdateNote(Context context) {
+    public static boolean UpdateNote(Context context, int proj, int student, int note) {
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
-        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
+        String url = "https://" + IP + "/pfe/webservice.php?q=NEWT&user=" + username + "&proj=" +
+                proj + "&student=" + student + "&note=" + note + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
-        String response = GetRequest(url, queue);
+        String response = PostRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if (!jsonObj.has("error")){
-
+                //TODO: Developp here NEWNT Request
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
@@ -270,23 +296,33 @@ public abstract class PostMan extends Application {
         return true;
     }
 
-
     /**
      * PORTE Request
      * @param context : context of the application
      * @return a list of up to five maximum random, non confidential projects that have a poster
      */
     public static List RandomProjects(Context context) {
+        return RandomProjects(context, "NONE");
+    }
+
+
+    /**
+     * PORTE Request
+     * @param context : context of the application
+     * @param seed : parameter that can be used to guarantee that the same random projects are chosen each time
+     * @return a list of up to five maximum random, non confidential projects that have a poster
+     */
+    public static List RandomProjects(Context context, String seed) {
         List list = new ArrayList();
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
-        String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
+        String url = "https://" + IP + "/pfe/webservice.php?q=PORTE&user=" + username + "&seed=" + seed + "&token=" + token;
         RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-
+                //TODO: Developp here PORTE Request
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
@@ -297,13 +333,12 @@ public abstract class PostMan extends Application {
     }
 
 
-
-
-
-
-
-
-
+    /**
+     * Used to gat the sharedPreference
+     * @param GetSharedPref : the SharePref that we want to get
+     * @param context : context of the application
+     * @return the sharedPreference
+     */
     private static String GetSharedPreferences (String GetSharedPref, Context context){
         String mySharePreferenceThing = "";
         SharedPreferences sharedpreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -313,7 +348,12 @@ public abstract class PostMan extends Application {
         return mySharePreferenceThing;
     }
 
-
+    /**
+     * Is used to make a GET request on server
+     * @param url : url of the server
+     * @param queue : the queue for the request
+     * @return the result of the request as a String
+     */
     private static String GetRequest(String url, RequestQueue queue){
         //TODO: Absolutely change that (because it's a very important security issue) :
         trustEveryone();
@@ -338,6 +378,72 @@ public abstract class PostMan extends Application {
     }
 
 
+    /**
+     * Post Request
+     * @param url
+     * @param queue
+     * @return
+     */
+    private static String PostRequest(String url, RequestQueue queue){
+        /*
+        try {
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            String URL = "http://...";
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("Title", "Android Volley Demo");
+            jsonBody.put("Author", "BNK");
+            final String requestBody = jsonBody.toString();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.i("VOLLEY", response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("VOLLEY", error.toString());
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                        return null;
+                    }
+                }
+
+                @Override
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    String responseString = "";
+                    if (response != null) {
+                        responseString = String.valueOf(response.statusCode);
+                        // can get more details such as response.headers
+                    }
+                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                }
+            };
+
+            requestQueue.add(stringRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+         */
+        return null;
+    }
+
+    /**
+     * Class TrustEveryone
+     *
+     * Class that have to change, because for now it trust all certificates, so it is a major security problem
+     */
     private static void trustEveryone() {
         try {
             HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
