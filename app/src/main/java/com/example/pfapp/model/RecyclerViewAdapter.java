@@ -71,7 +71,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private final TextView projetTitre;
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            projetTitre = itemView.findViewById(R.id.filmography_titre);
+            projetTitre = itemView.findViewById(R.id.projet_titre);
         }
     }
 }

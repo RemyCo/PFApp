@@ -2,11 +2,10 @@ package com.example.pfapp.model;
 
 import android.content.Context;
 
-import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Projet.class, User.class, Jury.class, Studiant.class}, version = 2)
+//@Database(entities = {Projet.class, User.class, Jury.class, Studiant.class}, version = 2)
 
 public abstract class DatabasePFApp extends RoomDatabase {
 
