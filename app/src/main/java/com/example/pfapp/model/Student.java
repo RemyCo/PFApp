@@ -8,13 +8,61 @@
 
 package com.example.pfapp.model;
 
-public class Student extends User {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "Student")
+public class Student{
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_student")
+    private int id;
+    @ColumnInfo(name = "mynote")
     private float mynote;
+    @ColumnInfo(name = "vgnote")
     private float vgnote;
+    @ColumnInfo(name = "forename")
+    private String forename;
+    @ColumnInfo(name = "surname")
+    private String surname;
 
+
+    public Student(int id,String forename, String surname) {
+        this.id = id;
+        this.forename = forename;
+        this.surname = surname;
+    }
+
+    @Ignore
     public Student(String forename, String surname) {
-        super(forename, surname);
+        this.forename = forename;
+        this.surname = surname;
+    }
+
+    public String getForename() {
+        return forename;
+    }
+
+    public void setForename(String forename) {
+        this.forename = forename;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public float getMynote() {

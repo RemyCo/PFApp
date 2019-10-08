@@ -2,11 +2,11 @@ package com.example.pfapp.model;
 
 import android.content.Context;
 
+import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-//@Database(entities = {Projet.class, User.class, Jury.class, Studiant.class}, version = 2)
-
+@Database(entities = {Project.class, User.class, Jury.class, Student.class}, exportSchema = false, version = 1)
 public abstract class DatabasePFApp extends RoomDatabase {
 
     private static DatabasePFApp INSTANCE;
@@ -23,7 +23,6 @@ public abstract class DatabasePFApp extends RoomDatabase {
         if(INSTANCE==null){
             INSTANCE = Room.databaseBuilder(context, DatabasePFApp.class, "PFApp.db")
                     .fallbackToDestructiveMigration()
-                    .addCallback(new DatabasePFAppCallBack())
                     .build();
         }
         return INSTANCE;
