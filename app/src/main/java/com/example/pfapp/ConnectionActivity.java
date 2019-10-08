@@ -1,6 +1,15 @@
+/*
+ * Class ConnectionActivity
+ * Version 0.5
+ * 07/10/2019
+ * Author : Rémy Coquard
+ * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
+ */
+
 package com.example.pfapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +26,6 @@ public class ConnectionActivity extends AppCompatActivity {
     protected EditText username;
     protected String token;
     private Button buttonConnect;
-    private static EditText ipServer;
 
     private EditText password;
 
@@ -34,16 +42,16 @@ public class ConnectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO: Change that, because it has no sense to do that here : for testing only
-                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                boolean connected = PostMan.ConnectToServer(username, password, queue);
+
+                Context context = getApplicationContext();
+
+                boolean connected = PostMan.ConnectToServer(username, password, context);
                 if (connected) {
                     Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
                     showAlertDialogButtonClicked(findViewById(android.R.id.content));
                 }
-                Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
-                startActivity(intent);
             }
         });
     }
