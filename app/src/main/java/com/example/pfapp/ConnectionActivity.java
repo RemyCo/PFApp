@@ -15,27 +15,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 
 public class ConnectionActivity extends AppCompatActivity {
 
     protected EditText username;
-    protected String token;
-    private Button buttonConnect;
 
     private EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Button buttonConnect;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connection);
 
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
+
+        username.setText("vallovic", TextView.BufferType.EDITABLE);
+        password.setText("6r654tgiKhxt", TextView.BufferType.EDITABLE);
+
         buttonConnect = (Button)findViewById(R.id.buttonConnection);
 
         buttonConnect.setOnClickListener(new View.OnClickListener() {

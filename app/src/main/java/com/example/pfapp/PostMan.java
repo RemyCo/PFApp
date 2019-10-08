@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,8 +39,10 @@ import javax.net.ssl.X509TrustManager;
 
 public abstract class PostMan extends Application {
 
-    private static String responseServer = "";
+    private static String responseServer = "not_receiving";
     private static String IP = "192.168.4.240";
+
+    private static RequestQueue queue;
 
     /**
      * LOGON Request
@@ -50,7 +53,7 @@ public abstract class PostMan extends Application {
      */
     public static boolean ConnectToServer(final EditText username, final EditText password, Context context) {
         String url = "https://" + IP + "/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
-        RequestQueue queue = Volley.newRequestQueue(context);
+        queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         boolean connected = false;
         try {
@@ -77,24 +80,25 @@ public abstract class PostMan extends Application {
      * @param context : context of the application
      * @return List of all projects
      */
-    public static List ListofAllProjects(Context context) {
-        List list = new ArrayList();
+    public static boolean ListofAllProjects(Context context) {
+        boolean isDoneWithoutError = false;
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=LIPRJ&user=" + username + "&token=" + token;
-        RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
                 //TODO: Developp here LIPRJ Request
+                JSONArray jArray = jsonObj.getJSONArray("projects");
+                isDoneWithoutError = true;
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
-        return list;
+        return isDoneWithoutError;
     }
 
 
@@ -103,24 +107,24 @@ public abstract class PostMan extends Application {
      * @param context : context of the application
      * @return a list of all the projects where the user is the supervisor
      */
-    public static List ListofAllProjectsUser(Context context) {
-        List list = new ArrayList();
+    public static boolean ListofAllProjectsUser(Context context) {
+        boolean isDoneWithoutError = false;
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
-        RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
                 //TODO: Developp here MYPRJ Request
+                isDoneWithoutError = true;
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
-        return list;
+        return isDoneWithoutError;
     }
 
     /**
@@ -128,24 +132,24 @@ public abstract class PostMan extends Application {
      * @param context : context of the application
      * @return a list of all the juries
      */
-    public static List ListofAllJuries(Context context) {
-        List list = new ArrayList();
+    public static boolean ListofAllJuries(Context context) {
+        boolean isDoneWithoutError = false;
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=LIJUR&user=" + username + "&token=" + token;
-        RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
                 //TODO: Developp here LIJUR Request
+                isDoneWithoutError = true;
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
-        return list;
+        return isDoneWithoutError;
     }
 
 
@@ -154,24 +158,24 @@ public abstract class PostMan extends Application {
      * @param context : context of the application
      * @return a list of all the juries where the user is a member of the jury
      */
-    public static List ListofAllProjectsJuriesUser(Context context) {
-        List list = new ArrayList();
+    public static boolean ListofAllProjectsJuriesUser(Context context) {
+        boolean isDoneWithoutError = false;
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=MYJUR&user=" + username + "&token=" + token;
-        RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
                 //TODO: Developp here MYJUR Request
+                isDoneWithoutError = true;
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
-        return list;
+        return isDoneWithoutError;
     }
 
 
@@ -180,24 +184,24 @@ public abstract class PostMan extends Application {
      * @param context : context of the application
      * @return a list of all the projects which are assessed by the Jury if and only if the identified user is a member of the jury
      */
-    public static List ListofAllJuryMember(Context context, int jury) {
-        List list = new ArrayList();
+    public static boolean ListofAllJuryMember(Context context, int jury) {
+        boolean isDoneWithoutError = false;
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=JYINF&user=" + username + "&jury=" + jury  + "&token=" + token;
-        RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
                 //TODO: Developp here JYINF Request
+                isDoneWithoutError = true;
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
-        return list;
+        return isDoneWithoutError;
     }
 
     protected enum posterSize {FULL, THUMB, FLB64, THB64};
@@ -220,24 +224,24 @@ public abstract class PostMan extends Application {
      * @return a PNG image of the poster
      */
     public static boolean poster (Context context, int proj, posterSize style) {
-        List list = new ArrayList();
+        boolean isDoneWithoutError = false;
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=POSTR&user=" + username + "&proj=" +
                 proj + "&style=" + style + "&token=" + token;
-        RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
                 //TODO: Developp here POSTR Request
+                isDoneWithoutError = true;
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
-        return true;
+        return isDoneWithoutError;
     }
 
 
@@ -247,24 +251,24 @@ public abstract class PostMan extends Application {
      * @param proj : id of the project
      * @return a list of the team members for the given project, with their average note and the note given by the given user
      */
-    public static List ListofNotesProjectMember(Context context, int proj) {
-        List list = new ArrayList();
+    public static boolean ListofNotesProjectMember(Context context, int proj) {
+        boolean isDoneWithoutError = false;
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=NOTES&user=" + username + "&proj=" + proj + "&token=" + token;
-        RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
                 //TODO: Developp here NOTES Request
+                isDoneWithoutError = true;
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
-        return list;
+        return isDoneWithoutError;
     }
 
 
@@ -277,23 +281,24 @@ public abstract class PostMan extends Application {
      * @return true if the note have been change on the website
      */
     public static boolean UpdateNote(Context context, int proj, int student, int note) {
+        boolean isDoneWithoutError = false;
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=NEWT&user=" + username + "&proj=" +
                 proj + "&student=" + student + "&note=" + note + "&token=" + token;
-        RequestQueue queue = Volley.newRequestQueue(context);
         String response = PostRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if (!jsonObj.has("error")){
                 //TODO: Developp here NEWNT Request
+                isDoneWithoutError = true;
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
-        return true;
+        return isDoneWithoutError;
     }
 
     /**
@@ -301,7 +306,7 @@ public abstract class PostMan extends Application {
      * @param context : context of the application
      * @return a list of up to five maximum random, non confidential projects that have a poster
      */
-    public static List RandomProjects(Context context) {
+    public static boolean RandomProjects(Context context) {
         return RandomProjects(context, "NONE");
     }
 
@@ -312,24 +317,24 @@ public abstract class PostMan extends Application {
      * @param seed : parameter that can be used to guarantee that the same random projects are chosen each time
      * @return a list of up to five maximum random, non confidential projects that have a poster
      */
-    public static List RandomProjects(Context context, String seed) {
-        List list = new ArrayList();
+    public static boolean RandomProjects(Context context, String seed) {
+        boolean isDoneWithoutError = false;
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=PORTE&user=" + username + "&seed=" + seed + "&token=" + token;
-        RequestQueue queue = Volley.newRequestQueue(context);
         String response = GetRequest(url, queue);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
                 //TODO: Developp here PORTE Request
+                isDoneWithoutError = true;
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
-        return list;
+        return isDoneWithoutError;
     }
 
 
@@ -362,7 +367,6 @@ public abstract class PostMan extends Application {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
                         responseServer = response;
                     }
                 }, new Response.ErrorListener() {

@@ -8,13 +8,8 @@
 
 package com.example.pfapp;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -67,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        /**
+        /*
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.nav_header_main, null);
         TextView username = v.findViewById(R.id.nav_header);
@@ -75,6 +70,6 @@ public class MainActivity extends AppCompatActivity {
         if (sharedpreferences.contains("username")) {
             username.setText(sharedpreferences.getString("username", ""));
         }
-         **/ // Does not work, but have no time to make this working
+         */ // Does not work, but have no time to make this working
     }
 }
