@@ -1,3 +1,11 @@
+/*
+ * Class DeconnexionFragment
+ * Version 0.2
+ * 08/10/2019
+ * Author : Emilien TETU
+ * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
+ */
+
 package com.example.pfapp.ui.deconnexion;
 
 import android.os.Bundle;
