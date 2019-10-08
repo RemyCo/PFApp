@@ -10,22 +10,22 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pfapp.R;
-import com.example.pfapp.ui.share.ShareFragment;
+import com.example.pfapp.ui.listeDesProjets.ListeDesProjetsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
 
-    private final ShareFragment shareFragment;
+    private final ListeDesProjetsFragment listeDesProjetsFragment;
     //TODO : changer pour le noms des projets
     private List<String> projetInformation;
     private List<Integer> positions;
 
     private float radius = 50;
 
-    public RecyclerViewAdapter(ShareFragment shareFragment) {
-        this.shareFragment = shareFragment;
+    public RecyclerViewAdapter(ListeDesProjetsFragment listeDesProjetsFragment) {
+        this.listeDesProjetsFragment = listeDesProjetsFragment;
         projetInformation = new ArrayList<>();
         projetInformation.add("TEST1");
         projetInformation.add("TEST2");
@@ -56,7 +56,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shareFragment.profilDescription();
+                listeDesProjetsFragment.profilDescription();
             }
         });
     }

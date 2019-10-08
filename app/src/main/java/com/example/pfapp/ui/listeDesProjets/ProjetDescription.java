@@ -1,4 +1,4 @@
-package com.example.pfapp.model;
+package com.example.pfapp.ui.listeDesProjets;
 
 import android.os.Bundle;
 
