@@ -8,7 +8,7 @@
 
 package com.example.pfapp.model;
 
-public abstract class User {
+public class User {
 
     private String forename;
     private String surname;

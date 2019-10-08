@@ -8,31 +8,42 @@
 
 package com.example.pfapp.model;
 
+import java.util.ArrayList;
+
 public class ListOfAllProjects {
 
-    private Project[] listOfProjects;
-    private int index = 0;
+    private static ArrayList<Project> listOfProjects;
 
-    public ListOfAllProjects(Project[] listOfProjects) {
+    public ListOfAllProjects(ArrayList<Project> listOfProjects) {
         this.listOfProjects = listOfProjects;
     }
 
-    public void setListOfProjects(Project[] listOfProjects) {
+    public void setListOfProjects(ArrayList<Project> listOfProjects) {
         this.listOfProjects = listOfProjects;
     }
 
-    public Project[] getListOfProjects() {
+    public ArrayList<Project> getListOfProjects() {
         return listOfProjects;
     }
 
     public void addProject(Project project){
-        listOfProjects[index] = project;
+        listOfProjects.add(project);
     }
 
-    public boolean exists(Project project){
+    public boolean projectExists(Project project){
         boolean exists = false;
-        for (int indexExists = 0; indexExists != listOfProjects.length; indexExists++){
-            if (listOfProjects[indexExists].equals(project)){
+        for (int indexExists = 0; indexExists != listOfProjects.size(); indexExists++){
+            if (listOfProjects.contains(project)){
+                exists = true;
+            }
+        }
+        return exists;
+    }
+
+    public boolean projectIdExists(int idProject){
+        boolean exists = false;
+        for (int indexExists = 0; indexExists != listOfProjects.size(); indexExists++){
+            if (listOfProjects.get(indexExists).getIdProj() == idProject){
                 exists = true;
             }
         }

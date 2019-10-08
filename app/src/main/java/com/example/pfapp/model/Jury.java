@@ -8,13 +8,15 @@
 
 package com.example.pfapp.model;
 
+import java.util.ArrayList;
+
 public class Jury{
 
     private String date;
-    private User[] members;
-    private Project[] projects;
+    private ArrayList<User> members;
+    private ArrayList<Project> projects;
 
-    public Jury(String date, User[] members, Project[] projects) {
+    public Jury(String date, ArrayList<User> members, ArrayList<Project> projects) {
         this.date = date;
         this.members = members;
         this.projects = projects;
@@ -28,19 +30,19 @@ public class Jury{
         this.date = date;
     }
 
-    public User[] getMembers() {
+    public ArrayList<User> getMembers() {
         return members;
     }
 
-    public void setMembers(User[] members) {
+    public void setMembers(ArrayList<User> members) {
         this.members = members;
     }
 
-    public Project[] getProjects() {
+    public ArrayList<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(Project[] projects) {
+    public void setProjects(ArrayList<Project> projects) {
         this.projects = projects;
     }
 }

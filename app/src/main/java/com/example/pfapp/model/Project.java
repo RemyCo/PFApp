@@ -8,21 +8,29 @@
 
 package com.example.pfapp.model;
 
+import java.util.ArrayList;
+
 public class Project {
 
+    private int idProj;
     private String title;
     private String description;
-    private String poster;                                  //TODO: Poster is not a String
+    private int poster;                                  //TODO: Poster is not a String
     private String confid;
     private User supervisor;
-    private User[] students;
+    private ArrayList<Student> students;
 
-    public Project(String title, String description, String confid, User supervisor, User[] students) {
+    public Project(int idProj, String title, String description, String confid, User supervisor, ArrayList<Student> students) {
+        this.idProj = idProj;
         this.title = title;
         this.description = description;
         this.confid = confid;
         this.supervisor = supervisor;
         this.students = students;
+    }
+
+    public int getIdProj() {
+        return idProj;
     }
 
     public String getTitle() {
@@ -41,11 +49,11 @@ public class Project {
         this.description = description;
     }
 
-    public String getPoster() {
+    public int getPoster() {
         return poster;
     }
 
-    public void setPoster(String poster) {
+    public void setPoster(int poster) {
         this.poster = poster;
     }
 
@@ -65,11 +73,11 @@ public class Project {
         this.supervisor = supervisor;
     }
 
-    public User[] getStudents() {
+    public ArrayList<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(User[] students) {
+    public void setStudents(ArrayList<Student> students) {
         this.students = students;
     }
 

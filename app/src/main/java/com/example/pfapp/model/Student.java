@@ -10,11 +10,16 @@ package com.example.pfapp.model;
 
 public class Student extends User {
 
+    private int idUser;
     private float mynote;
     private float vgnote;
 
-    public Student(String forename, String surname) {
+    public Student(int idUser, String forename, String surname) {
         super(forename, surname);
+    }
+
+    public int getIdUser() {
+        return idUser;
     }
 
     public float getMynote() {

@@ -8,6 +8,7 @@
 
 package com.example.pfapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -62,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        Context context = getApplicationContext();
+        PostMan.ListofAllProjects(context);
+        PostMan.ListofAllProjects(context);
         /*
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.nav_header_main, null);
