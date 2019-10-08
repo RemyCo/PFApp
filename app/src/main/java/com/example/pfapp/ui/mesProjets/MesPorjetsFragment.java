@@ -1,4 +1,4 @@
-package com.example.pfapp.ui.gallery;
+package com.example.pfapp.ui.mesProjets;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.pfapp.R;
 
-public class GalleryFragment extends Fragment {
+public class MesPorjetsFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
 

@@ -1,4 +1,4 @@
-package com.example.pfapp.ui.slideshow;
+package com.example.pfapp.ui.agenda;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.pfapp.R;
 
-public class SlideshowFragment extends Fragment {
+public class AgendaFragment extends Fragment {
 
     private SlideshowViewModel slideshowViewModel;
 

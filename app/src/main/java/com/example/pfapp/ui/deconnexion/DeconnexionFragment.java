@@ -1,4 +1,4 @@
-package com.example.pfapp.ui.send;
+package com.example.pfapp.ui.deconnexion;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.pfapp.R;
 
-public class SendFragment extends Fragment {
+public class DeconnexionFragment extends Fragment {
 
     private SendViewModel sendViewModel;
 

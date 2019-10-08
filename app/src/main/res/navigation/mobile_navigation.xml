@@ -13,31 +13,31 @@
 
     <fragment
         android:id="@+id/nav_mes_projets"
-        android:name="com.example.pfapp.ui.gallery.GalleryFragment"
+        android:name="com.example.pfapp.ui.mesProjets.MesPorjetsFragment"
         android:label="@string/menu_mes_projet"
         tools:layout="@layout/fragment_mes_projets" />
 
     <fragment
         android:id="@+id/nav_agenda"
-        android:name="com.example.pfapp.ui.slideshow.SlideshowFragment"
+        android:name="com.example.pfapp.ui.agenda.AgendaFragment"
         android:label="@string/menu_agenda"
         tools:layout="@layout/fragment_agenda" />
 
     <fragment
         android:id="@+id/nav_plan"
-        android:name="com.example.pfapp.ui.tools.ToolsFragment"
+        android:name="com.example.pfapp.ui.plan.PlanFragment"
         android:label="@string/menu_plan"
         tools:layout="@layout/fragment_plan" />
 
     <fragment
         android:id="@+id/nav_liste_projet"
-        android:name="com.example.pfapp.ui.share.ShareFragment"
+        android:name="com.example.pfapp.ui.listeDesProjets.ListeDesProjetsFragment"
         android:label="@string/menu_liste_projet"
         tools:layout="@layout/fragment_liste_des_projets" />
 
     <fragment
         android:id="@+id/nav_send"
-        android:name="com.example.pfapp.ui.send.SendFragment"
+        android:name="com.example.pfapp.ui.deconnexion.DeconnexionFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
 </navigation>

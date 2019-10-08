@@ -1,4 +1,4 @@
-package com.example.pfapp.ui.share;
+package com.example.pfapp.ui.listeDesProjets;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pfapp.R;
-import com.example.pfapp.model.ProjetDescription;
 import com.example.pfapp.model.RecyclerViewAdapter;
 
-public class ShareFragment extends Fragment {
+public class ListeDesProjetsFragment extends Fragment {
 
     private ShareViewModel shareViewModel;
     private RecyclerViewAdapter recyclerViewAdapter;

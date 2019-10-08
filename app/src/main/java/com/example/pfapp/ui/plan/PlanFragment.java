@@ -1,4 +1,4 @@
-package com.example.pfapp.ui.tools;
+package com.example.pfapp.ui.plan;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.pfapp.R;
 
-public class ToolsFragment extends Fragment {
+public class PlanFragment extends Fragment {
 
     private ToolsViewModel toolsViewModel;
 
