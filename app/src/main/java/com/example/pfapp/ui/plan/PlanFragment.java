@@ -1,4 +1,4 @@
-package com.example.pfapp.ui.slideshow;
+package com.example.pfapp.ui.plan;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,15 +11,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.pfapp.R;
 
-public class SlideshowFragment extends Fragment {
+public class PlanFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private ToolsViewModel toolsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_agenda, container, false);
+        toolsViewModel =
+                ViewModelProviders.of(this).get(ToolsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_plan, container, false);
         return root;
     }
 }

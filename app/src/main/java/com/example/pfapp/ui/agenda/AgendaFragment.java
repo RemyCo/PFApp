@@ -1,4 +1,4 @@
-package com.example.pfapp.ui.share;
+package com.example.pfapp.ui.agenda;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,15 +11,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.pfapp.R;
 
-public class ShareFragment extends Fragment {
+public class AgendaFragment extends Fragment {
 
-    private ShareViewModel shareViewModel;
+    private SlideshowViewModel slideshowViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        shareViewModel =
-                ViewModelProviders.of(this).get(ShareViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_liste_des_projets, container, false);
+        slideshowViewModel =
+                ViewModelProviders.of(this).get(SlideshowViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_agenda, container, false);
         return root;
     }
 }

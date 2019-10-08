@@ -1,4 +1,4 @@
-package com.example.pfapp.ui.tools;
+package com.example.pfapp.ui.mesProjets;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,15 +11,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.pfapp.R;
 
-public class ToolsFragment extends Fragment {
+public class MesPorjetsFragment extends Fragment {
 
-    private ToolsViewModel toolsViewModel;
+    private GalleryViewModel galleryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_plan, container, false);
+        galleryViewModel =
+                ViewModelProviders.of(this).get(GalleryViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_mes_projets, container, false);
         return root;
     }
 }
