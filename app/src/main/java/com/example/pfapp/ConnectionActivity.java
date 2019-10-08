@@ -18,9 +18,6 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-
 public class ConnectionActivity extends AppCompatActivity {
 
     protected EditText username;
@@ -52,6 +49,8 @@ public class ConnectionActivity extends AppCompatActivity {
                 } else {
                     showAlertDialogButtonClicked(findViewById(android.R.id.content));
                 }
+                Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

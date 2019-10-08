@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pfapp.ProjetDescriptionActivity;
 import com.example.pfapp.R;
 import com.example.pfapp.model.RecyclerViewAdapter;
 
@@ -36,7 +37,7 @@ public class ListeDesProjetsFragment extends Fragment {
     }
 
     public void profilDescription(){
-        Intent intent = new Intent(getActivity(), ProjetDescription.class);
+        Intent intent = new Intent(getActivity(), ProjetDescriptionActivity.class);
         startActivity(intent);
     }
 }

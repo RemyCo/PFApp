@@ -10,4 +10,5 @@
     <dimen name="titre_taille">30dp</dimen>
     <dimen name="paragrphe_taille">25dp</dimen>
     <dimen name="titre_projet">100dp</dimen>
+    <dimen name="button">50dp</dimen>
 </resources>
