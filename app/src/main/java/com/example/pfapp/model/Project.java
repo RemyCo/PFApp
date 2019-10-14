@@ -78,11 +78,11 @@ public class Project {
         this.description = description;
     }
 
-    public String getPoster() {
+    public int getPoster() {
         return poster;
     }
 
-    public void setPoster(String poster) {
+    public void setPoster(int poster) {
         this.poster = poster;
     }
 
@@ -101,7 +101,7 @@ public class Project {
     public void setSupervisor(int supervisor) {
         this.supervisor = supervisor;
     }
-
+  
     public int getStudents() {
         return students;
     }

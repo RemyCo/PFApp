@@ -65,6 +65,10 @@ public class Student{
         this.id = id;
     }
 
+    public int getIdUser() {
+        return idUser;
+    }
+
     public float getMynote() {
         return mynote;
     }
