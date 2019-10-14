@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class JuryWithUsers {
     @Embedded
-    public Jury jury;
+    public JuryDB jury;
 
-    @Relation(entity = User.class, parentColumn = "ref_members", entityColumn = "id_user")
-    public ArrayList<User> members;
+    @Relation(entity = UserDB.class, parentColumn = "ref_members", entityColumn = "id_user")
+    public ArrayList<UserDB> members;
 }

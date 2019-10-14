@@ -18,15 +18,15 @@ import java.util.List;
 
 @Dao
 public interface ProjetDao {
-    @Query("SELECT * FROM Project WHERE id_project = :idProject")
-    List<Project> getProjectList(int idProject);
+    @Query("SELECT * FROM ProjectDB WHERE id_project = :idProject")
+    List<ProjectDB> getProjectList(int idProject);
 
     @Insert
-    void insertProject(Project project);
+    void insertProject(ProjectDB project);
 
     @Update
-    void updateProject(Project project);
+    void updateProject(ProjectDB project);
 
     @Delete
-    void deleteProject(Project project);
+    void deleteProject(ProjectDB project);
 }

@@ -18,6 +18,8 @@
             android:maxLines="1"
             android:minLines="1"
             android:text="Prénom Nom"
+            android:background="@color/colorLightBlue"
+            android:textColor="@color/colorDark"
             android:textAlignment="center"
             android:textSize="15sp"
             android:textStyle="bold"

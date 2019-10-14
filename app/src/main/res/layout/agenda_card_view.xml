@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:background="@color/colorWhite"
     android:elevation="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
+            android:textColor="@color/colorDark"
             android:text="Titre du projet"
             android:paddingLeft="9dp"
             android:textSize="24sp"
@@ -33,7 +35,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginRight="10dp"
             android:text="4"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPink"
             android:textAlignment="center"
             android:textSize="48sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -43,7 +45,7 @@
         <View
             android:layout_width="4dp"
             android:layout_height="80dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPink"
             android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/title_project"

@@ -46,8 +46,8 @@ public class PostMan {
     private static String responseServer = "";
     private static String IP = "192.168.4.240";
 
-    private static ListOfAllProjects projects = ListOfAllProjects.getInstance();
-    private static ListOfAllUsers users = ListOfAllUsers.getInstance();
+    private static ListOfAllProjects projects = new ListOfAllProjects(new ArrayList<Project>());
+    private static ListOfAllUsers users = new ListOfAllUsers(new ArrayList<User>());
 
     private Context context;
 
@@ -114,7 +114,9 @@ public class PostMan {
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
+                //TODO: Developp here LIPRJ Request
                 JSONArray jArray = jsonObj.getJSONArray("projects");
+                Log.d("blabla", Integer.toString(jArray.length()));
                 for(int i=0; i<jArray.length(); i++){
                     JSONObject json_data = jArray.getJSONObject(i);
                     if (!projects.projectIdExists(json_data.getInt("projectId"))){
@@ -130,31 +132,32 @@ public class PostMan {
                         ArrayList<Student> students = new ArrayList<>();
                         Student student;
                         for(int j=0; j<studentsJson.length(); j++){
-                            JSONObject json_student_data = studentsJson.getJSONObject(j);
+                            JSONObject json_student_data = studentsJson.getJSONObject(i);
                             if(!users.userNameExists(json_student_data.getString("forename"), json_student_data.getString("surname"))){
                                 student = new Student(json_student_data.getInt("userId"), json_student_data.getString("forename"), json_student_data.getString("surname"));
-                                users.addUser(student);
+                                //TODO : enlever le commentaire
+                                //users.addUser(student);
                                 students.add(student);
                             } else {
                                 supervisor = users.getUser(users.userNameExistIndex(supervisorJson.getString("forename"), supervisorJson.getString("surname")));
                             }
                         }
-                        Project myProject = new Project(
+                        //TODO : enlever les commentaires
+                        /*new Project(
                                 json_data.getInt("projectId"),
                                 json_data.getString("title"),
                                 json_data.getString("descrip"),
                                 json_data.getString("confid"),
                                 supervisor,
                                 students
-                        );
-                        projects.addProject(myProject);
+                        );*/
                     }
                 }
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
-            Log.d("blabla", "JSONException Error : " + e.getMessage());
+            Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
     }
 

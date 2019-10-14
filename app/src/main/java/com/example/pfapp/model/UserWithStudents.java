@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class UserWithStudents {
     @Embedded
-    public User user;
+    public UserDB user;
 
-    @Relation(entity = Student.class, parentColumn = "ref_students", entityColumn = "id_student")
-    public ArrayList<Student> studients;
+    @Relation(entity = StudentDB.class, parentColumn = "ref_students", entityColumn = "id_student")
+    public ArrayList<StudentDB> studients;
 }
