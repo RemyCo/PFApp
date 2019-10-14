@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class JuryWithProjects {
     @Embedded
-    public Jury jury;
+    public JuryDB jury;
 
-    @Relation(entity = Project.class, parentColumn = "ref_projects", entityColumn = "id_project")
-    public ArrayList<Project> projects;
+    @Relation(entity = ProjectDB.class, parentColumn = "ref_projects", entityColumn = "id_project")
+    public ArrayList<ProjectDB> projects;
 }

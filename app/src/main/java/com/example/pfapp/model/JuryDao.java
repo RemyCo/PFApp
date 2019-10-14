@@ -18,16 +18,16 @@ import java.util.List;
 
 @Dao
 public interface JuryDao {
-    @Query("SELECT * FROM Jury WHERE id_jury = :idJury")
+    @Query("SELECT * FROM JuryDB WHERE id_jury = :idJury")
 
-    List<Jury> getJuryList(int idJury);
+    List<JuryDB> getJuryList(int idJury);
 
     @Insert
-    void insertJury(Jury jury);
+    void insertJury(JuryDB jury);
 
     @Update
-    void updateJury(Jury jury);
+    void updateJury(JuryDB jury);
 
     @Delete
-    void deleteJury(Jury jury);
+    void deleteJury(JuryDB jury);
 }

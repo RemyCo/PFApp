@@ -21,6 +21,8 @@
             android:maxLines="2"
             android:minLines="2"
             android:text="Monty Python and the Holy Grail"
+            android:background="@color/colorWhite"
+            android:textColor="@color/colorDark"
             android:textAlignment="textStart"
             android:textSize="24sp"
             android:textStyle="bold"

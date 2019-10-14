@@ -135,20 +135,22 @@ public class PostMan {
                             JSONObject json_student_data = studentsJson.getJSONObject(i);
                             if(!users.userNameExists(json_student_data.getString("forename"), json_student_data.getString("surname"))){
                                 student = new Student(json_student_data.getInt("userId"), json_student_data.getString("forename"), json_student_data.getString("surname"));
-                                users.addUser(student);
+                                //TODO : enlever le commentaire
+                                //users.addUser(student);
                                 students.add(student);
                             } else {
                                 supervisor = users.getUser(users.userNameExistIndex(supervisorJson.getString("forename"), supervisorJson.getString("surname")));
                             }
                         }
-                        new Project(
+                        //TODO : enlever les commentaires
+                        /*new Project(
                                 json_data.getInt("projectId"),
                                 json_data.getString("title"),
                                 json_data.getString("descrip"),
                                 json_data.getString("confid"),
                                 supervisor,
                                 students
-                        );
+                        );*/
                     }
                 }
             } else {

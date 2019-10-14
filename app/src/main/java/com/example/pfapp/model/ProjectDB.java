@@ -8,18 +8,45 @@
 
 package com.example.pfapp.model;
 
-public class Project {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "ProjectDB" , foreignKeys = {
+        @ForeignKey(entity=UserDB.class, parentColumns = "id_user", childColumns = "ref_supervisor"),
+        @ForeignKey(entity=StudentDB.class, parentColumns = "id_student",childColumns = "ref_students")
+})
+public class ProjectDB {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_project")
     private int id;
+    @ColumnInfo(name = "title")
     private String title;
+    @ColumnInfo(name = "description")
     private String description;
+    @ColumnInfo(name = "poster")
     private int poster;
+    @ColumnInfo(name = "confid")//TODO: Poster is not a String
     private String confid;
+    @ColumnInfo(name = "ref_supervisor")
     private int supervisor;
+    @ColumnInfo(name = "ref_students")
     private int students;
 
-    public Project(int id,String title, String description, String confid, int supervisor, int students) {
+    public ProjectDB(int id, String title, String description, String confid, int supervisor, int students) {
         this.id = id;
+        this.title = title;
+        this.description = description;
+        this.confid = confid;
+        this.supervisor = supervisor;
+        this.students = students;
+    }
+
+    @Ignore
+    public ProjectDB(String title, String description, String confid, int supervisor, int students) {
         this.title = title;
         this.description = description;
         this.confid = confid;
