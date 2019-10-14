@@ -1,5 +1,5 @@
 /*
- * Class RecyclerViewAdapter
+ * Class RecyclerViewAdapterAgenda
  * Version 0.2
  * 08/10/2019
  * Author : Emilien TETU
@@ -17,57 +17,50 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pfapp.MainActivity;
 import com.example.pfapp.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
+public class RecyclerViewAdapterAgenda extends RecyclerView.Adapter<RecyclerViewAdapterAgenda.RecyclerViewHolder> {
 
-    private MainActivity mainActivity;
     //TODO : changer pour le noms des projets
-    private List<String> projetInformation;
-    private List<Integer> positions;
+    private ArrayList<String> projects;
+    private ArrayList<String> dateOfProject;
 
-    private float radius = 50;
+    private float radius = 5;
 
-    public RecyclerViewAdapter(ArrayList<String> array,MainActivity main) {
-        this.mainActivity = main;
-        this.projetInformation = array;
-        positions = new ArrayList<>();
+    public RecyclerViewAdapterAgenda(ArrayList<String> projects, ArrayList<String> date) {
+        this.projects = projects;
+        this.dateOfProject = date;
     }
 
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View projetView = LayoutInflater.from(parent.getContext()).inflate(R.layout.projet_card_view,parent,false);
+        View projetView = LayoutInflater.from(parent.getContext()).inflate(R.layout.agenda_card_view,parent,false);
         ((CardView)projetView).setRadius(radius);
         return new RecyclerViewHolder(projetView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerViewHolder holder, final int position) {
-        holder.projetTitre.setText(projetInformation.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainActivity.profilDescription();
-            }
-        });
+        holder.nameProject.setText(projects.get(position));
+        holder.dateProject.setText(dateOfProject.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return projetInformation.size();
+        return projects.size();
     }
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView projetTitre;
+        private final TextView dateProject;
+        private final TextView nameProject;
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            projetTitre = itemView.findViewById(R.id.projet_titre);
+            nameProject = itemView.findViewById(R.id.title_project);
+            dateProject = itemView.findViewById(R.id.txt_date);
         }
     }
 }
