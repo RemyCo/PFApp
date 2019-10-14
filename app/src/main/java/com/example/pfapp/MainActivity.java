@@ -65,8 +65,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         Context context = getApplicationContext();
-        PostMan.ListofAllProjects(context);
-        PostMan.ListofAllProjects(context);
+        PostMan.getInstance(context).ListofAllProjects();
         /*
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.nav_header_main, null);

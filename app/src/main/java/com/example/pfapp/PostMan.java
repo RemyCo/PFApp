@@ -8,14 +8,13 @@
 
 package com.example.pfapp;
 
-import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.EditText;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -40,7 +39,9 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.X509TrustManager;
 
-public abstract class PostMan extends Application {
+public class PostMan {
+
+    private static PostMan INSTANCE = null;
 
     private static String responseServer = "";
     private static String IP = "192.168.4.240";
@@ -48,57 +49,74 @@ public abstract class PostMan extends Application {
     private static ListOfAllProjects projects = new ListOfAllProjects(new ArrayList<Project>());
     private static ListOfAllUsers users = new ListOfAllUsers(new ArrayList<User>());
 
-    private RequestQueue queue = RequestQueueSingleton.getInstance(this.getApplicationContext()).getRequestQueue();
+    private Context context;
+
+
+
+    private PostMan(Context context) {
+        // Private (Cause we are making a Singleton)
+        this.context = context;
+    }
+
+    public static synchronized PostMan getInstance(Context context) {
+        if (INSTANCE == null) {
+            INSTANCE = new PostMan(context);
+        }
+        return(INSTANCE);
+    }
 
 
     /**
      * LOGON Request
      * @param username : The username of a user
      * @param password : The password of the user
-     * @param context : The context of the application
      */
-    public void ConnectToServer(final EditText username, final EditText password, Context context) {
+    public void ConnectToServer(final EditText username, final EditText password) {
         String url = "https://" + IP + "/pfe/webservice.php?q=LOGON&user=" + username.getText() + "&pass=" + password.getText();
-        GetLOGINRequest(url, context, username);
+        GetLOGINRequest(url, username);
     }
 
-    public void LOGONRequest(String response, Context context, EditText username){
+    private void LOGONRequest(String response, EditText username){
+        Intent intent = new Intent();
+        intent.setAction(ConnectionActivity.MyBroadcastReceiver.ACTION);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-                SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", 0);
+                SharedPreferences pref = context.getSharedPreferences("MyPref", 0);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString("username", "" + username.getText()); // Storing username
                 editor.putString("token", jsonObj.getString("token")); // Storing token
                 editor.apply();
-                ConnectionActivity.VerifyLOGON(context);
+                intent.putExtra("dataToPass", "VerifyLOGON");
+
             } else {
                 Log.d("blabla", "Error on Credentials");
-                ConnectionActivity.VerifyLOGONFalse(context);
+                intent.putExtra("dataToPass", "VerifyLOGONFalse");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
-            ConnectionActivity.VerifyLOGONFalse(context);
+            intent.putExtra("dataToPass", "VerifyLOGONFalse");
         }
+        context.sendBroadcast(intent);
     }
 
     /**
      * LIPRJ Request
-     * @param context : context of the application
      */
-    public void ListofAllProjects(Context context) {
+    public void ListofAllProjects() {
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=LIPRJ&user=" + username + "&token=" + token;
-        GetRequest(url, context, "LIPRJ");
+        GetRequest(url, "LIPRJ");
     }
 
-    public void LIPRJRequest(String response, Context context){
+    private void LIPRJRequest(String response){
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
                 //TODO: Developp here LIPRJ Request
                 JSONArray jArray = jsonObj.getJSONArray("projects");
+                Log.d("blabla", Integer.toString(jArray.length()));
                 for(int i=0; i<jArray.length(); i++){
                     JSONObject json_data = jArray.getJSONObject(i);
                     if (!projects.projectIdExists(json_data.getInt("projectId"))){
@@ -144,16 +162,15 @@ public abstract class PostMan extends Application {
 
     /**
      * MYPRJ Request
-     * @param context : context of the application
      */
-    public void ListofAllProjectsUser(Context context) {
+    public void ListofAllProjectsUser() {
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=MYPRJ&user=" + username + "&token=" + token;
-        GetRequest(url, context, "MYPRJ");
+        GetRequest(url,"MYPRJ");
     }
 
-    public void MYPRJRequest (String response, Context context){
+    private void MYPRJRequest (String response){
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
@@ -168,17 +185,16 @@ public abstract class PostMan extends Application {
 
     /**
      * LIJUR Request
-     * @param context : context of the application
      */
-    public void ListofAllJuries(Context context) {
+    public void ListofAllJuries() {
         boolean isDoneWithoutError = false;
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=LIJUR&user=" + username + "&token=" + token;
-        GetRequest(url, context, "LIJUR");
+        GetRequest(url, "LIJUR");
     }
 
-    public void LIJURRequest (String response, Context context){
+    private void LIJURRequest (String response){
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
@@ -194,18 +210,17 @@ public abstract class PostMan extends Application {
 
     /**
      * MYJUR Request
-     * @param context : context of the application
      */
-    public void ListofAllProjectsJuriesUser(Context context) {
+    public void ListofAllProjectsJuriesUser() {
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=MYJUR&user=" + username + "&token=" + token;
-        GetRequest(url, context, "MYJUR");
+        GetRequest(url, "MYJUR");
     }
 
 
 
-    public void MYJURRequest (String response, Context context){
+    private void MYJURRequest (String response){
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
@@ -221,18 +236,17 @@ public abstract class PostMan extends Application {
 
     /**
      * JYINF Request
-     * @param context : context of the application
      */
-    public void ListofAllJuryMember(Context context, int jury) {
+    public void ListofAllJuryMember(int jury) {
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=JYINF&user=" + username + "&jury=" + jury  + "&token=" + token;
-        GetRequest(url, context, "JYINF");
+        GetRequest(url, "JYINF");
     }
 
 
 
-    public void JYINFRequest (String response, Context context){
+    private void JYINFRequest (String response){
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
@@ -249,30 +263,28 @@ public abstract class PostMan extends Application {
 
     /**
      * POSTR Request
-     * @param context : context of the application
      * @param proj : id of the project
      */
-    public void poster (Context context, int proj) {
-        poster(context, proj, posterSize.FULL);
+    public void poster (int proj) {
+        poster(proj, posterSize.FULL);
     }
 
     /**
      * POSTR Request
-     * @param context : context of the application
      * @param proj : id of the project
      * @param style : Size of the image
      */
-    public void poster (Context context, int proj, posterSize style) {
+    public void poster (int proj, posterSize style) {
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=POSTR&user=" + username + "&proj=" +
                 proj + "&style=" + style + "&token=" + token;
-        GetRequest(url, context, "POSTR");
+        GetRequest(url, "POSTR");
     }
 
 
 
-    public void POSTRRequest (String response, Context context){
+    private void POSTRRequest (String response){
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
@@ -288,17 +300,16 @@ public abstract class PostMan extends Application {
 
     /**
      * NOTES Request
-     * @param context : context of the application
      * @param proj : id of the project
      */
-    public void ListofNotesProjectMember(Context context, int proj) {
+    public void ListofNotesProjectMember(int proj) {
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=NOTES&user=" + username + "&proj=" + proj + "&token=" + token;
-        GetRequest(url, context, "NOTES");
+        GetRequest(url, "NOTES");
     }
 
-    public void NOTESRequest (String response, Context context){
+    private void NOTESRequest (String response){
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
@@ -314,24 +325,23 @@ public abstract class PostMan extends Application {
 
     /**
      * NEWNT Request
-     * @param context : context of the application
      * @param proj : id of the project
      * @param student : id of the student
      * @param note : note that would be given to the student
      */
-    public void UpdateNote(Context context, int proj, int student, int note) {
+    public void UpdateNote(int proj, int student, int note) {
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=NEWT&user=" + username + "&proj=" +
                 proj + "&student=" + student + "&note=" + note + "&token=" + token;
-        String response = PostRequest(url, context);
+        String response = PostRequest(url);
     }
 
-    public void NEWNTRequest (String response, Context context){
+    private void NEWNTRequest (String response){
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-                //TODO: Developp here MYPRJ Request
+                //TODO: Developp here NEWNT Request
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
@@ -342,27 +352,24 @@ public abstract class PostMan extends Application {
 
     /**
      * PORTE Request
-     * @param context : context of the application
      */
-    public void RandomProjects(Context context) {
-        RandomProjects(context, "NONE");
+    public void RandomProjects() {
+        RandomProjects("NONE");
     }
 
 
     /**
-     * PORTE Request
-     * @param context : context of the application
+     * PORTE Request (a list of up to five maximum random, non confidential projects that have a poster)
      * @param seed : parameter that can be used to guarantee that the same random projects are chosen each time
-     * @return a list of up to five maximum random, non confidential projects that have a poster
      */
-    public void RandomProjects(Context context, String seed) {
+    public void RandomProjects(String seed) {
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=PORTE&user=" + username + "&seed=" + seed + "&token=" + token;
-        GetRequest(url, context, "PORTE");
+        GetRequest(url, "PORTE");
     }
 
-    public  void PORTERequest (String response, Context context){
+    private void PORTERequest (String response){
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
@@ -395,14 +402,14 @@ public abstract class PostMan extends Application {
      * Is used to make a GET request on server
      * @param url : url of the request on the server
      */
-    private void GetLOGINRequest(String url, final Context context, final EditText username){
+    private void GetLOGINRequest(String url, final EditText username){
         //TODO: Absolutely change that (because it's a very important security issue) :
         trustEveryone();
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                LOGONRequest(response, context, username);
+                LOGONRequest(response, username);
                 }
         }, new Response.ErrorListener() {
             @Override
@@ -420,7 +427,7 @@ public abstract class PostMan extends Application {
      * Is used to make a GET request on server
      * @param url : url of the request on the server
      */
-    private void GetRequest(String url, final Context context, final String request){
+    private void GetRequest(String url, final String request){
         //TODO: Absolutely change that (because it's a very important security issue) :
         trustEveryone();
         // Request a string response from the provided URL.
@@ -429,23 +436,23 @@ public abstract class PostMan extends Application {
                     public void onResponse(String response) {
                         switch(request){
                             case "LIPRJ":
-                                LIPRJRequest(response, context);
+                                LIPRJRequest(response);
                             case "MYPRJ":
-                                MYPRJRequest(response, context);
+                                MYPRJRequest(response);
                             case "LIJUR":
-                                LIJURRequest(response, context);
+                                LIJURRequest(response);
                             case "MYJUR":
-                                MYJURRequest(response, context);
+                                MYJURRequest(response);
                             case "JYINF":
-                                JYINFRequest(response, context);
+                                JYINFRequest(response);
                             case "POSTR":
-                                POSTRRequest(response, context);
+                                POSTRRequest(response);
                             case "NOTES":
-                                NOTESRequest(response, context);
+                                NOTESRequest(response);
                             case "NEWNT":
-                                NEWNTRequest(response, context);
+                                NEWNTRequest(response);
                             case "PORTE":
-                                PORTERequest(response, context);
+                                PORTERequest(response);
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -463,10 +470,9 @@ public abstract class PostMan extends Application {
     /**
      * Post Request
      * @param url : url of the request
-     * @param context : context of the application
      * @return String
      */
-    private static String PostRequest(String url, Context context){
+    private static String PostRequest(String url){
         /*
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
