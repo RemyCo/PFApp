@@ -14,9 +14,9 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Jury" , foreignKeys = {
-        @ForeignKey(entity=User.class, parentColumns = "id_user", childColumns = "ref_members"),
-        @ForeignKey(entity=Project.class, parentColumns = "id_project", childColumns = "ref_projects")
+@Entity(tableName = "JuryDB" , foreignKeys = {
+        @ForeignKey(entity=UserDB.class, parentColumns = "id_user", childColumns = "ref_members"),
+        @ForeignKey(entity=ProjectDB.class, parentColumns = "id_project", childColumns = "ref_projects")
 })
 public class JuryDB {
 

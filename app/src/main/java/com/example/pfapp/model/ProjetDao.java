@@ -18,8 +18,8 @@ import java.util.List;
 
 @Dao
 public interface ProjetDao {
-    @Query("SELECT * FROM ProjectDB WHERE id = :idProject")
-    List<Project> getProjectList(int idProject);
+    @Query("SELECT * FROM ProjectDB WHERE id_project = :idProject")
+    List<ProjectDB> getProjectList(int idProject);
 
     @Insert
     void insertProject(ProjectDB project);

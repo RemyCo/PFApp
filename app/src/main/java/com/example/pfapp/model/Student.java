@@ -23,10 +23,6 @@ public class Student {
         this.surname = surname;
     }
 
-    public Student(String forename, String surname) {
-        this.forename = forename;
-        this.surname = surname;
-    }
 
     public String getForename() {
         return forename;

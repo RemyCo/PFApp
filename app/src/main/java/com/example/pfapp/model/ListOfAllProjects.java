@@ -44,9 +44,9 @@ public class ListOfAllProjects {
         boolean exists = false;
         for (int indexExists = 0; indexExists != listOfProjects.size(); indexExists++){
             //TODO : enlever le commentaire et demander à remy
-            if (listOfProjects.get(indexExists).getIdProj() == idProject){
+            /*if (listOfProjects.get(indexExists).getIdProj() == idProject){
                 exists = true;
-            }
+            }*/
         }
         return exists;
     }

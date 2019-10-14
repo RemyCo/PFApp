@@ -27,14 +27,6 @@ public class Project {
         this.students = students;
     }
 
-    public Project(String title, String description, String confid, int supervisor, int students) {
-        this.title = title;
-        this.description = description;
-        this.confid = confid;
-        this.supervisor = supervisor;
-        this.students = students;
-    }
-
     public int getId() {
         return id;
     }

@@ -13,7 +13,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "User")
+@Entity(tableName = "UserDB")
 public class UserDB {
 
     @PrimaryKey(autoGenerate = true)

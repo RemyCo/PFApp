@@ -22,12 +22,6 @@ public class Jury{
         this.projects = projects;
     }
 
-    public Jury(String date, int members, int projects) {
-        this.date = date;
-        this.members = members;
-        this.projects = projects;
-    }
-
     public int getId() {
         return id;
     }

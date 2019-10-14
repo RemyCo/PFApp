@@ -18,8 +18,8 @@ import java.util.List;
 
 @Dao
 public interface StudiantDao {
-    @Query("SELECT * FROM StudentDB WHERE id = :idStudent")
-    List<Student> getStudentList(int idStudent);
+    @Query("SELECT * FROM StudentDB WHERE id_student = :idStudent")
+    List<StudentDB> getStudentList(int idStudent);
 
     @Insert
     void insertStudent(StudentDB student);

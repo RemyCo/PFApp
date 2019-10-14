@@ -14,16 +14,12 @@ public class User {
     private String forename;
     private String surname;
 
-    public User(int idUser, String forename, String surname) {
+    public User(String forename, String surname) {
         this.idUser = idUser;
         this.forename = forename;
         this.surname = surname;
     }
 
-    public User(String forename, String surname) {
-        this.forename = forename;
-        this.surname = surname;
-    }
 
     public int getIdUser() {
         return idUser;
