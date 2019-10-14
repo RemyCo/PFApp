@@ -8,6 +8,7 @@
 
 package com.example.pfapp;
 
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -75,5 +78,10 @@ public class MainActivity extends AppCompatActivity {
             username.setText(sharedpreferences.getString("username", ""));
         }
          */ // Does not work, but have no time to make this working
+    }
+
+    public void profilDescription(){
+        Intent intent = new Intent(this, ProjetDescriptionActivity.class);
+        startActivity(intent);
     }
 }

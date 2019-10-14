@@ -1,5 +1,5 @@
 /*
- * Class RecyclerViewAdapter
+ * Class RecyclerViewAdapterStudent
  * Version 0.2
  * 08/10/2019
  * Author : Emilien TETU
@@ -17,57 +17,45 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pfapp.MainActivity;
 import com.example.pfapp.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
+public class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapterStudent.RecyclerViewHolder> {
 
-    private MainActivity mainActivity;
     //TODO : changer pour le noms des projets
-    private List<String> projetInformation;
-    private List<Integer> positions;
+    private List<String> student;
 
-    private float radius = 50;
+    private float radius = 20;
 
-    public RecyclerViewAdapter(ArrayList<String> array,MainActivity main) {
-        this.mainActivity = main;
-        this.projetInformation = array;
-        positions = new ArrayList<>();
+    public RecyclerViewAdapterStudent(List<String> student) {
+        this.student = student;
     }
 
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View projetView = LayoutInflater.from(parent.getContext()).inflate(R.layout.projet_card_view,parent,false);
+        View projetView = LayoutInflater.from(parent.getContext()).inflate(R.layout.student_card_view,parent,false);
         ((CardView)projetView).setRadius(radius);
         return new RecyclerViewHolder(projetView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerViewHolder holder, final int position) {
-        holder.projetTitre.setText(projetInformation.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainActivity.profilDescription();
-            }
-        });
+        holder.NameStudent.setText(student.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return projetInformation.size();
+        return student.size();
     }
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView projetTitre;
+        private final TextView NameStudent;
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            projetTitre = itemView.findViewById(R.id.projet_titre);
+            NameStudent = itemView.findViewById(R.id.textNom);
         }
     }
 }
