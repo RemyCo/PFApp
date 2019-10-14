@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ui.listeDesProjets.ProjetDescription"></activity>
+        <activity android:name=".ProjetDescriptionActivity">
+
+        </activity>
     </application>
 
 </manifest>
