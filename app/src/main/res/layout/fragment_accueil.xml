@@ -10,8 +10,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:background="@color/colorLightBlue">
 
 
             <TextView
@@ -19,7 +19,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/titre"
                 android:text="@string/titre_poster"
-                android:textAlignment="center"
                 android:textSize="@dimen/titre_taille"
                 android:textColor="@color/colorDark"
                 android:layout_marginTop="30dp"
@@ -44,27 +43,40 @@
                 app:layout_constraintTop_toBottomOf="@+id/view_poster">
             </TextView>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="il n'y a pas de poster pour le moment"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titre_poster">
+            </TextView>
+
             <view
                 class="androidx.appcompat.app.AlertController$RecycleListView"
                 android:id="@+id/view_poster"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/poster_accueil"
-                android:background="@color/colorBlue"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titre_poster"></view>
 
-            <view
-                class="androidx.appcompat.app.AlertController$RecycleListView"
-                android:id="@+id/view_agenda"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_agenda"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/poster_accueil"
-                android:background="@color/colorBlue"
+                android:layout_height="wrap_content"
+
                 android:layout_marginTop="5dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintLeft_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titre_agenda"></view>
+                app:layout_constraintTop_toBottomOf="@+id/titre_agenda"
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -18,15 +18,15 @@ import java.util.List;
 
 @Dao
 public interface UserDao {
-    @Query("SELECT * FROM User WHERE id_user = :idUser")
-    List<User> getUserList(int idUser);
+    @Query("SELECT * FROM UserDB WHERE id_user = :idUser")
+    List<UserDB> getUserList(int idUser);
 
     @Insert
-    void insertUser(User user);
+    void insertUser(UserDB user);
 
     @Update
-    void updateUser(User user);
+    void updateUser(UserDB user);
 
     @Delete
-    void deleteUser(User user);
+    void deleteUser(UserDB user);
 }

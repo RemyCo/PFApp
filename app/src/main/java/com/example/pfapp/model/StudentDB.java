@@ -8,21 +8,38 @@
 
 package com.example.pfapp.model;
 
-public class Student {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "StudentDB")
+public class StudentDB{
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_student")
     private int id;
+    @ColumnInfo(name = "mynote")
     private float mynote;
+    @ColumnInfo(name = "vgnote")
     private float vgnote;
+    @ColumnInfo(name = "forename")
     private String forename;
+    @ColumnInfo(name = "surname")
     private String surname;
 
 
-    public Student(int id, String forename, String surname) {
+    public StudentDB(int id,String forename, String surname) {
         this.id = id;
         this.forename = forename;
         this.surname = surname;
     }
 
+    @Ignore
+    public StudentDB(String forename, String surname) {
+        this.forename = forename;
+        this.surname = surname;
+    }
 
     public String getForename() {
         return forename;
@@ -68,3 +85,4 @@ public class Student {
         this.vgnote = vgnote;
     }
 }
+

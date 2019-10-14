@@ -13,7 +13,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Project.class, User.class, Jury.class, Student.class}, exportSchema = false, version = 1)
+@Database(entities = {ProjectDB.class, UserDB.class, JuryDB.class, StudentDB.class}, exportSchema = false, version = 2)
 public abstract class DatabasePFApp extends RoomDatabase {
 
     private static DatabasePFApp INSTANCE;

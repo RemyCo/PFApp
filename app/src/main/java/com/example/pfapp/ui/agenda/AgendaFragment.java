@@ -36,6 +36,7 @@ public class AgendaFragment extends Fragment {
         slideshowViewModel =
                 ViewModelProviders.of(this).get(SlideshowViewModel.class);
         View root = inflater.inflate(R.layout.fragment_agenda, container, false);
+
         RecyclerView projetRecycler = (RecyclerView) root.findViewById(R.id.rv_agenda);
         projetRecycler.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
