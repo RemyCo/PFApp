@@ -8,21 +8,36 @@
 
 package com.example.pfapp.model;
 
-public class Jury{
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "Jury" , foreignKeys = {
+        @ForeignKey(entity=User.class, parentColumns = "id_user", childColumns = "ref_members"),
+        @ForeignKey(entity=Project.class, parentColumns = "id_project", childColumns = "ref_projects")
+})
+public class JuryDB {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_jury")
     private int id;
+    @ColumnInfo(name = "date")
     private String date;
+    @ColumnInfo(name = "ref_members")
     private int members;
+    @ColumnInfo(name = "ref_projects")
     private int projects;
 
-    public Jury(int id,String date, int members, int projects) {
+    public JuryDB(int id, String date, int members, int projects) {
         this.id = id;
         this.date = date;
         this.members = members;
         this.projects = projects;
     }
-
-    public Jury(String date, int members, int projects) {
+    @Ignore
+    public JuryDB(String date, int members, int projects) {
         this.date = date;
         this.members = members;
         this.projects = projects;

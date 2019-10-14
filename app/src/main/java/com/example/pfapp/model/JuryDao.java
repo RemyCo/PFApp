@@ -18,7 +18,7 @@ import java.util.List;
 
 @Dao
 public interface JuryDao {
-    @Query("SELECT * FROM Jury WHERE id_jury = :idJury")
+    @Query("SELECT * FROM JuryDB WHERE id = :idJury")
 
     List<Jury> getJuryList(int idJury);
 

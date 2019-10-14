@@ -18,15 +18,15 @@ import java.util.List;
 
 @Dao
 public interface StudiantDao {
-    @Query("SELECT * FROM Student WHERE id_student = :idStudent")
+    @Query("SELECT * FROM StudentDB WHERE id = :idStudent")
     List<Student> getStudentList(int idStudent);
 
     @Insert
-    void insertStudent(Student student);
+    void insertStudent(StudentDB student);
 
     @Update
-    void updateStudent(Student student);
+    void updateStudent(StudentDB student);
 
     @Delete
-    void deleteStudent(Student student);
+    void deleteStudent(StudentDB student);
 }
