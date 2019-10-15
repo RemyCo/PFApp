@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +42,7 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
     TextView confid;
     TextView supervisor;
     String name;
+    ImageView poster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
         projetRecycler.setLayoutManager(llm);
 
         title = (TextView) findViewById(R.id.textTitreProjet);
-        title.setText(name);
+        title.setText(myProject.getTitle());
 
         desc = (TextView) findViewById(R.id.textDescriptionProjet);
         desc.setText(myProject.getDescription());
@@ -72,6 +74,10 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
 
         supervisor = (TextView) findViewById(R.id.textSuperiviseurProjet);
         supervisor.setText(myProject.getSupervisor().getForename()+" "+myProject.getSupervisor().getSurname());
+
+        poster = (ImageView) findViewById(R.id.poster);
+        //todo : poster
+        poster.setImageResource(R.drawable.eseo_couleurs);
 
         listStudent = myProject.getStudents();
 

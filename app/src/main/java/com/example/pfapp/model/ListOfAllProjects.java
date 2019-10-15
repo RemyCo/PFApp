@@ -8,8 +8,6 @@
 
 package com.example.pfapp.model;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 public class ListOfAllProjects {
@@ -40,7 +38,6 @@ public class ListOfAllProjects {
     public int projectNameIndexExists(String name){
         for (int indexExists = 0; indexExists != listOfProjects.size(); indexExists++){
             if (listOfProjects.get(indexExists).getTitle().equals(name)){
-                Log.i("blabla", "projectNameIndexExists: "+listOfProjects.get(indexExists).getTitle());
                 return indexExists;
             }
         }
