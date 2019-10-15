@@ -11,6 +11,7 @@ package com.example.pfapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -30,7 +31,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -55,8 +58,6 @@ public class PostMan {
     private static ListOfAllJuries juries = ListOfAllJuries.getInstance();
 
     private Context context;
-
-
 
     private PostMan(Context context) {
         // Private (Cause we are making a Singleton)
@@ -334,27 +335,25 @@ public class PostMan {
      * @param proj : id of the project
      * @param style : Size of the image
      */
-    public void poster (int proj, posterSize style) {
+    public Drawable poster (int proj, posterSize style) {
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=POSTR&user=" + username + "&proj=" +
                 proj + "&style=" + style + "&token=" + token;
-        GetRequest(url, "POSTR");
+        //GetRequest(url, "POSTR");
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 
 
     private void POSTRRequest (String response){
-        try {
-            JSONObject jsonObj = new JSONObject(response);
-            if  (!jsonObj.has("error")){
-                //TODO: Developp here MYPRJ Request
-            } else {
-                Log.d("blabla", "Error on Credentials");
-            }
-        } catch (JSONException e) {
-            Log.d("blabla", "JSONException Error :" + e.getMessage());
-        }
+        //TODO: Maybe there is nothing todo
     }
 
 
