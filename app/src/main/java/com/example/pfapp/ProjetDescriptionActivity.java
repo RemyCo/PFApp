@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pfapp.model.ListOfAllProjects;
+import com.example.pfapp.model.Project;
 import com.example.pfapp.model.RecyclerViewAdapterStudent;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
     private Button buttonReturn;
     private Button buttonNote;
     private RecyclerViewAdapterStudent recyclerViewAdapter;
+    private ListOfAllProjects listProject = ListOfAllProjects.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,5 +77,9 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void sever(String name){
+        Project myProject = listProject.getProject(listProject.projectNameIndexExists(name));
     }
 }

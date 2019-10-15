@@ -8,14 +8,16 @@
 
 package com.example.pfapp.model;
 
+import java.util.Date;
+
 public class Jury{
 
     private int id;
-    private String date;
+    private Date date;
     private int members;
     private int projects;
 
-    public Jury(int id,String date, int members, int projects) {
+    public Jury(int id, Date date, int members, int projects) {
         this.id = id;
         this.date = date;
         this.members = members;
@@ -30,11 +32,11 @@ public class Jury{
         this.id = id;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
