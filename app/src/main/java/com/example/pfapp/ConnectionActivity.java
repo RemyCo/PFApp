@@ -34,6 +34,7 @@ public class ConnectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Button buttonConnect;
+        Button buttonVisit;
         receiver = new MyBroadcastReceiver();
         this.registerReceiver(receiver, new IntentFilter(MyBroadcastReceiver.ACTION));
         super.onCreate(savedInstanceState);
@@ -52,6 +53,19 @@ public class ConnectionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = getApplicationContext();
                 PostMan.getInstance(context).ConnectToServer(username, password);
+            }
+        });
+
+        buttonVisit = findViewById(R.id.buttonVisit);
+
+        buttonVisit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ConnectionActivity.this, VisitorActivity.class);
+                startActivity(intent);
+                //todo : demander à remy comment on fait pour la connexion du visiteur
+                //Context context = getApplicationContext();
+                //PostMan.getInstance(context).ConnectToServer(username, password);
             }
         });
     }
