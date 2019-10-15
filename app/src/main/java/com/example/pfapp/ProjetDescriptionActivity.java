@@ -27,6 +27,7 @@ import com.example.pfapp.model.ListOfAllProjects;
 import com.example.pfapp.model.Project;
 import com.example.pfapp.model.RecyclerViewAdapterStudent;
 import com.example.pfapp.model.Student;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
     TextView confid;
     TextView supervisor;
     String name;
-    ImageView poster;
+    ImageView imageViewPoster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +77,21 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
         supervisor = (TextView) findViewById(R.id.textSuperiviseurProjet);
         supervisor.setText(myProject.getSupervisor().getForename()+" "+myProject.getSupervisor().getSurname());
 
-        poster = (ImageView) findViewById(R.id.poster);
-        //todo : poster
-        poster.setImageResource(R.drawable.eseo_couleurs);
+        imageViewPoster = (ImageView) findViewById(R.id.poster);
+        String url = PostMan.getInstance(getApplicationContext()).poster(myProject.getId(), PostMan.posterSize.THUMB);
+        Picasso.with(getApplicationContext()).load(url).into(imageViewPoster, new com.squareup.picasso.Callback() {                 //Does not work with Picasso 2.7
+            @Override
+            public void onSuccess() {
+                //do smth when picture is loaded successfully
+                Log.d("blabla", "Success");
+            }
+
+            @Override
+            public void onError() {
+                //do smth when there is picture loading error
+                Log.d("blabla", "Failure");
+            }
+        });
 
         listStudent = myProject.getStudents();
 
@@ -110,9 +123,5 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        ImageView imageView = findViewById(R.id.view_poster); //TODO: Change view_poster
-        Drawable poster = PostMan.getInstance(getApplicationContext()).poster(1, PostMan.posterSize.FULL);
-        imageView.setImageDrawable(poster);
     }
 }

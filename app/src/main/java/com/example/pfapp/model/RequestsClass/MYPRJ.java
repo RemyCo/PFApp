@@ -22,8 +22,13 @@ public class MYPRJ {
         return(INSTANCE);
     }
 
-    public static ArrayList<Project> getListOfProjects() {
+
+    public ArrayList<Project> getListOfProjects() {
         return listOfProjects;
+    }
+
+    public Project getProject(int index) {
+        return listOfProjects.get(index);
     }
 
     public void addMYPRJProject(Project project){

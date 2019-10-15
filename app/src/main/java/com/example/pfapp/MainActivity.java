@@ -44,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void myProjects(){
+        Context context = getApplicationContext();
+        PostMan.getInstance(context).ListofAllProjectsUser();
+    }
+
     private void afterOnCreate(){
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -126,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
         try {
             if (receiveString.equals("AllProjects")){
                 afterOnCreate();
-            } else if (receiveString.equals("myProjects")){
-                Log.d("blabla", "myProjects");
+            } else if (receiveString.equals("MyProjects")){
+                Log.d("blabla", "MyProjects");
             } else {
                 Log.d("blabla", "An error occurs, receiveString not equals to something good");
             }

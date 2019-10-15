@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pfapp.MainActivity;
 import com.example.pfapp.R;
 import com.example.pfapp.model.RecyclerViewAdapter;
+import com.example.pfapp.model.RequestsClass.MYPRJ;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class MesProjetsFragment extends Fragment {
     private GalleryViewModel galleryViewModel;
     private RecyclerViewAdapter recyclerViewAdapter;
     private ArrayList<String> projetInformation = new ArrayList<>();
+    private MYPRJ myProjects = MYPRJ.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,12 +44,9 @@ public class MesProjetsFragment extends Fragment {
         llm.setOrientation(RecyclerView.VERTICAL);
         projetRecycler.setLayoutManager(llm);
 
-        //TODO : ajouter la liste des projets "myProject"
-
-        projetInformation.add("PROJET_1");
-        projetInformation.add("PROJET_2");
-        projetInformation.add("PROJET_3");
-        projetInformation.add("PROJET_4");
+        for (int i=0; i<myProjects.getListOfProjects().size(); i++){
+            projetInformation.add(myProjects.getProject(i).getTitle());
+        }
 
         recyclerViewAdapter = new RecyclerViewAdapter(projetInformation, (MainActivity) getActivity());
         projetRecycler.setAdapter(recyclerViewAdapter);
