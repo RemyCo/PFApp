@@ -58,13 +58,10 @@ public class ConnectionActivity extends AppCompatActivity {
 
     protected void VerifyLOGON(){
         Log.d("blabla", "VerifyLOGON : True");
-        PostMan.getInstance(getApplicationContext()).ListofAllProjects();
-    }
-
-    protected void AllProjects(){
         Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
         this.startActivity(intent);
     }
+
 
     protected void VerifyLOGONFalse(){
         showAlertDialogButtonClicked(this);
@@ -103,8 +100,6 @@ public class ConnectionActivity extends AppCompatActivity {
                 VerifyLOGON();
             } else if (receiveString.equals("VerifyLOGONFalse")){
                 VerifyLOGONFalse();
-            } else if (receiveString.equals("AllProjects")){
-                AllProjects();
             } else {
                 Log.d("blabla", "An error occurs, receiveString not equals to something good");
             }

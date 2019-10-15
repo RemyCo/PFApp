@@ -45,32 +45,16 @@ public class ListOfAllUsers {
     }
 
     public boolean userExists(User user){
-        boolean exists = false;
-        for (int indexExists = 0; indexExists != listOfUsers.size(); indexExists++){
-            if (listOfUsers.contains(user)){
-                exists = true;
-            }
-        }
-        return exists;
+        return listOfUsers.contains(user);
     }
 
-
-    public boolean userNameExists(String forename, String surname){
-        Log.d("blabla", listOfUsers.size() + "");
-        Log.d("blabla", forename);
-        Log.d("blabla", surname);
+    public int userIndexExists(User user){
         for (int indexExists = 0; indexExists != listOfUsers.size(); indexExists++){
-            try {
-                if (listOfUsers.get(indexExists).getForename().equals(forename)){
-                    if (listOfUsers.get(indexExists).getSurname().equals(surname)){
-                        return true;
-                    }
-                }
-            } catch (NullPointerException e){
-                Log.d("blabla","NullPointerExeption Error : " + e.getMessage());
+            if (listOfUsers.get(indexExists) == user){
+                return indexExists;
             }
         }
-        return false;
+        return 0;
     }
 
 

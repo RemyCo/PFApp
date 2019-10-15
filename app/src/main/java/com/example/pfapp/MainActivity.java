@@ -9,8 +9,10 @@
 package com.example.pfapp;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -32,11 +35,22 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MyBroadcastReceiver receiver;
+
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        receiver = new MyBroadcastReceiver();
+        this.registerReceiver(receiver, new IntentFilter(ConnectionActivity.MyBroadcastReceiver.ACTION));
+        Context context = getApplicationContext();
+        PostMan.getInstance(context).ListofAllProjects();
         super.onCreate(savedInstanceState);
+
+    }
+
+
+    private void afterOnCreate(){
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,13 +87,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         Context context = getApplicationContext();
-        PostMan.getInstance(context).ListofAllProjects();
-
         changeUserName(context);
+    }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
     }
 
     /**
@@ -104,4 +120,27 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProjetDescriptionActivity.class);
         startActivity(intent);
     }
+
+
+    protected class MyBroadcastReceiver extends BroadcastReceiver {
+        public static final String ACTION = "com.example.ACTION_SOMETHING";
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String receiveString = intent.getStringExtra("dataToPass");
+            getFromReceiver(receiveString);
+        }
+    }
+
+    private void getFromReceiver(@Nullable String receiveString) {
+        try {
+            if (receiveString.equals("AllProjects")){
+                afterOnCreate();
+            } else {
+                Log.d("blabla", "An error occurs, receiveString not equals to something good");
+            }
+        } catch (NullPointerException e){
+            Log.d("blabla", "Error :" + e.getMessage());
+        }
+    }
+
 }

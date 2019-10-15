@@ -124,12 +124,11 @@ public class PostMan {
                     JSONObject json_data = jArray.getJSONObject(i);
                     if (!projects.projectIdExists(json_data.getInt("projectId"))){
                         JSONObject supervisorJson = json_data.getJSONObject("supervisor");
-                        User supervisor;
-                        if(!users.userNameExists(supervisorJson.getString("forename"), supervisorJson.getString("surname"))){
-                            supervisor = new User(supervisorJson.getString("forename"), supervisorJson.getString("surname"));
+                        User supervisor = new User(supervisorJson.getString("forename"), supervisorJson.getString("surname"));
+                        if(!users.userExists(supervisor)){
                             users.addUser(supervisor);
                         } else {
-                            supervisor = users.getUser(users.userNameExistIndex(supervisorJson.getString("forename"), supervisorJson.getString("surname")));
+                            supervisor = users.getUser(users.userIndexExists(supervisor));
                         }
                         JSONArray studentsJson = json_data.getJSONArray("students");
                         ArrayList<Student> students = new ArrayList<>();
