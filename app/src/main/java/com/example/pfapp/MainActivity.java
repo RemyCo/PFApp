@@ -11,8 +11,14 @@ package com.example.pfapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.InflateException;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -70,15 +76,28 @@ public class MainActivity extends AppCompatActivity {
 
         Context context = getApplicationContext();
         PostMan.getInstance(context).ListofAllProjects();
-        /*
-        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.nav_header_main, null);
-        TextView username = v.findViewById(R.id.nav_header);
-        SharedPreferences sharedpreferences = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        if (sharedpreferences.contains("username")) {
-            username.setText(sharedpreferences.getString("username", ""));
+
+        changeUserName(context);
+
+
+    }
+
+    /**
+     * Change the username on the navigation drawer
+     * @param context : context of the application
+     */
+    private void changeUserName(Context context) {
+        try {
+            LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+            View v = inflater.inflate(R.layout.nav_header_main, null);
+            TextView username = v.findViewById(R.id.nav_header);
+            SharedPreferences sharedpreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+            if (sharedpreferences.contains("username")) {
+                username.setText(sharedpreferences.getString("username", ""));
+            }
+        } catch (InflateException e) {
+            Log.d("blabla", "InflateException Error : " + e.getMessage());
         }
-         */ // Does not work, but have no time to make this working
     }
 
     public void profilDescription(){

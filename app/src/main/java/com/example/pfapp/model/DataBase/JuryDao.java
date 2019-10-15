@@ -1,12 +1,12 @@
 /*
- * Class ProjetDao
+ * Class JuryDao
  * Version 0.2
  * 08/10/2019
  * Author : Emilien TETU
  * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
  */
 
-package com.example.pfapp.model;
+package com.example.pfapp.model.DataBase;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -17,16 +17,17 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface ProjetDao {
-    @Query("SELECT * FROM ProjectDB WHERE id_project = :idProject")
-    List<ProjectDB> getProjectList(int idProject);
+public interface JuryDao {
+    @Query("SELECT * FROM JuryDB WHERE id_jury = :idJury")
+
+    List<JuryDB> getJuryList(int idJury);
 
     @Insert
-    void insertProject(ProjectDB project);
+    void insertJury(JuryDB jury);
 
     @Update
-    void updateProject(ProjectDB project);
+    void updateJury(JuryDB jury);
 
     @Delete
-    void deleteProject(ProjectDB project);
+    void deleteJury(JuryDB jury);
 }

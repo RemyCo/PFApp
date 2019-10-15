@@ -8,17 +8,20 @@
 
 package com.example.pfapp.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Project {
 
     private int id;
     private String title;
     private String description;
-    private int poster;
+    private String poster;
     private String confid;
-    private int supervisor;
-    private int students;
+    private User supervisor;
+    private ArrayList<Student> students;
 
-    public Project(int id,String title, String description, String confid, int supervisor, int students) {
+    public Project(int id,String title, String description, String confid, User supervisor, ArrayList<Student> students) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -47,16 +50,16 @@ public class Project {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getPoster() {
+    public String getPoster() {
         return poster;
     }
 
-    public void setPoster(int poster) {
+    public void setPoster(String poster) {
         this.poster = poster;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getConfid() {
@@ -67,20 +70,12 @@ public class Project {
         this.confid = confid;
     }
 
-    public int getSupervisor() {
+    public User getSupervisor() {
         return supervisor;
     }
 
-    public void setSupervisor(int supervisor) {
+    public void setSupervisor(User supervisor) {
         this.supervisor = supervisor;
-    }
-  
-    public int getStudents() {
-        return students;
-    }
-
-    public void setStudents(int students) {
-        this.students = students;
     }
 
 }

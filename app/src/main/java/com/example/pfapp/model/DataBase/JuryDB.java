@@ -6,7 +6,7 @@
  * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
  */
 
-package com.example.pfapp.model;
+package com.example.pfapp.model.DataBase;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -15,8 +15,8 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "JuryDB" , foreignKeys = {
-        @ForeignKey(entity=UserDB.class, parentColumns = "id_user", childColumns = "ref_members"),
-        @ForeignKey(entity=ProjectDB.class, parentColumns = "id_project", childColumns = "ref_projects")
+        @ForeignKey(entity= UserDB.class, parentColumns = "id_user", childColumns = "ref_members"),
+        @ForeignKey(entity= ProjectDB.class, parentColumns = "id_project", childColumns = "ref_projects")
 })
 public class JuryDB {
 

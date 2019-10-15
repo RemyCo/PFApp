@@ -1,44 +1,47 @@
 /*
- * Class Student
+ * Class User
  * Version 0.2
  * 08/10/2019
  * Author : Rémy Coquard
  * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
  */
 
-package com.example.pfapp.model;
+package com.example.pfapp.model.DataBase;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "StudentDB")
-public class StudentDB{
+@Entity(tableName = "UserDB")
+public class UserDB {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id_student")
-    private int id;
-    @ColumnInfo(name = "mynote")
-    private float mynote;
-    @ColumnInfo(name = "vgnote")
-    private float vgnote;
+    @ColumnInfo(name = "id_user")
+    private int idUser;
     @ColumnInfo(name = "forename")
     private String forename;
     @ColumnInfo(name = "surname")
     private String surname;
 
-
-    public StudentDB(int id,String forename, String surname) {
-        this.id = id;
+    public UserDB(int idUser, String forename, String surname) {
+        this.idUser = idUser;
         this.forename = forename;
         this.surname = surname;
     }
 
     @Ignore
-    public StudentDB(String forename, String surname) {
+    public UserDB(String forename, String surname) {
         this.forename = forename;
         this.surname = surname;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public String getForename() {
@@ -56,33 +59,4 @@ public class StudentDB{
     public void setSurname(String surname) {
         this.surname = surname;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getIdUser() {
-        return id;
-    }
-
-    public float getMynote() {
-        return mynote;
-    }
-
-    public float getVgnote() {
-        return vgnote;
-    }
-
-    public void setMynote(float mynote) {
-        this.mynote = mynote;
-    }
-
-    public void setVgnote(float vgnote) {
-        this.vgnote = vgnote;
-    }
 }
-

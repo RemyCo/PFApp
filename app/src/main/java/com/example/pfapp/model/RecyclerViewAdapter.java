@@ -32,7 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private float radius = 50;
 
-    public RecyclerViewAdapter(ArrayList<String> array,MainActivity main) {
+    public RecyclerViewAdapter(ArrayList<String> array, MainActivity main) {
         this.mainActivity = main;
         this.projetInformation = array;
         positions = new ArrayList<>();

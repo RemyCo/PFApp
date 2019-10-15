@@ -8,10 +8,11 @@
 
 package com.example.pfapp.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class ListOfAllUsers {
-
 
     private static ListOfAllUsers INSTANCE;
     private static ArrayList<User> listOfUsers = new ArrayList<>();
@@ -55,27 +56,38 @@ public class ListOfAllUsers {
 
 
     public boolean userNameExists(String forename, String surname){
-        boolean exists = false;
+        Log.d("blabla", listOfUsers.size() + "");
+        Log.d("blabla", forename);
+        Log.d("blabla", surname);
         for (int indexExists = 0; indexExists != listOfUsers.size(); indexExists++){
-            if (listOfUsers.get(indexExists).getForename().equals(forename)){
-                if (listOfUsers.get(indexExists).getSurname().equals(surname)){
-                    exists = true;
+            try {
+                if (listOfUsers.get(indexExists).getForename().equals(forename)){
+                    if (listOfUsers.get(indexExists).getSurname().equals(surname)){
+                        return true;
+                    }
                 }
+            } catch (NullPointerException e){
+                Log.d("blabla","NullPointerExeption Error : " + e.getMessage());
             }
         }
-        return exists;
+        return false;
     }
 
 
     public int userNameExistIndex(String forename, String surname){
-        int index = 0;
         for (int indexExists = 0; indexExists != listOfUsers.size(); indexExists++){
-            if (listOfUsers.get(indexExists).getForename().equals(forename)){
-                if (listOfUsers.get(indexExists).getSurname().equals(surname)){
-                    index = indexExists;
+            try {
+                Log.d("blabla", listOfUsers.get(indexExists).getForename());
+                Log.d("blabla", listOfUsers.get(indexExists).getSurname());
+                if (listOfUsers.get(indexExists).getForename().equals(forename)){
+                    if (listOfUsers.get(indexExists).getSurname().equals(surname)){
+                        return indexExists;
+                    }
                 }
+            } catch (NullPointerException e){
+                Log.d("blabla","NullPointerExeption Error : " + e.getMessage());
             }
         }
-        return index;
+        return 0;
     }
 }

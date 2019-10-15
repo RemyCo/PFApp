@@ -6,7 +6,7 @@
  * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
  */
 
-package com.example.pfapp.model;
+package com.example.pfapp.model.DataBase;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
