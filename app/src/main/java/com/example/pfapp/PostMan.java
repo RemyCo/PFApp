@@ -18,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.pfapp.model.ListOfAllJuries;
 import com.example.pfapp.model.ListOfAllProjects;
 import com.example.pfapp.model.ListOfAllUsers;
 import com.example.pfapp.model.Project;
@@ -29,6 +30,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -49,6 +52,7 @@ public class PostMan {
 
     private static ListOfAllProjects projects = ListOfAllProjects.getInstance();
     private static ListOfAllUsers users = ListOfAllUsers.getInstance();
+    private static ListOfAllJuries juries = ListOfAllJuries.getInstance();
 
     private Context context;
 
@@ -198,13 +202,13 @@ public class PostMan {
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
+        context.sendBroadcast(intent);
     }
 
     /**
      * LIJUR Request
      */
     public void ListofAllJuries() {
-        boolean isDoneWithoutError = false;
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=LIJUR&user=" + username + "&token=" + token;
@@ -212,16 +216,28 @@ public class PostMan {
     }
 
     private void LIJURRequest (String response){
+        Intent intent = new Intent();
+        intent.setAction(ConnectionActivity.MyBroadcastReceiver.ACTION);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-                //TODO: Developp here MYPRJ Request
+                JSONArray jArray = jsonObj.getJSONArray("juries");
+                for(int i=0; i<jArray.length(); i++){
+                    JSONObject json_data = jArray.getJSONObject(i);
+                    if (juries.getListOfJuries().contains(juries.getListOfJuries().get(i))){
+                        //TODO
+                    } else {
+                        Log.d("blabla", "Error on LIJUR REQUEST");
+                    }
+                }
+                intent.putExtra("dataToPass", "AllJuries");
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
+        context.sendBroadcast(intent);
     }
 
 
@@ -238,16 +254,28 @@ public class PostMan {
 
 
     private void MYJURRequest (String response){
+        Intent intent = new Intent();
+        intent.setAction(ConnectionActivity.MyBroadcastReceiver.ACTION);
         try {
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-                //TODO: Developp here MYPRJ Request
+                JSONArray jArray = jsonObj.getJSONArray("juries");
+                for(int i=0; i<jArray.length(); i++){
+                    JSONObject json_data = jArray.getJSONObject(i);
+                    if (juries.getListOfJuries().contains(juries.getListOfJuries().get(i))){
+                        //TODO
+                    } else {
+                        Log.d("blabla", "Error on MYJUR REQUEST");
+                    }
+                }
+                intent.putExtra("dataToPass", "MyJuries");
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
+        context.sendBroadcast(intent);
     }
 
 
@@ -264,16 +292,31 @@ public class PostMan {
 
 
     private void JYINFRequest (String response){
-        try {
+        Intent intent = new Intent();
+        intent.setAction(ConnectionActivity.MyBroadcastReceiver.ACTION);
+        try {                                                                       //TODO:Change that for JYNF request
+            MYPRJ myProjects = MYPRJ.getInstance();
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-                //TODO: Developp here MYPRJ Request
+                JSONArray jArray = jsonObj.getJSONArray("projects");
+                for(int i=0; i<jArray.length(); i++){
+                    JSONObject json_data = jArray.getJSONObject(i);
+                    if (projects.projectIdExists(json_data.getInt("projectId"))){
+                        int index = projects.projectIdIndexExists(json_data.getInt("projectId"));
+                        Project myProject = projects.getProject(index);
+                        myProjects.addMYPRJProject(myProject);
+                    } else {
+                        Log.d("blabla", "Error on MYPRJ REQUEST");
+                    }
+                }
+                intent.putExtra("dataToPass", "MyProjects");
             } else {
                 Log.d("blabla", "Error on Credentials");
             }
         } catch (JSONException e) {
             Log.d("blabla", "JSONException Error :" + e.getMessage());
         }
+        context.sendBroadcast(intent);
     }
 
     protected enum posterSize {FULL, THUMB, FLB64, THB64};
@@ -451,6 +494,7 @@ public class PostMan {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        response = fixEncoding(response);
                         switch(request){
                             case "LIPRJ":
                                 LIPRJRequest(response);
@@ -481,6 +525,18 @@ public class PostMan {
 
         // Add the request to the RequestQueue.
         RequestQueueSingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    public static String fixEncoding(String response) {
+        try {
+            byte[] u = response.toString().getBytes(
+                    StandardCharsets.ISO_8859_1);
+            response = new String(u, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+
+            return null;
+        }
+        return response;
     }
 
 

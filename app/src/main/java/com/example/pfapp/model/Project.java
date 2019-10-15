@@ -77,4 +77,7 @@ public class Project {
         this.supervisor = supervisor;
     }
 
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
 }
