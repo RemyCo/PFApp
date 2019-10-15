@@ -8,6 +8,7 @@
 
 package com.example.pfapp.model;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("blabla", "onClick: "+projetInformation.get(position));
                 mainActivity.profilDescription();
             }
         });
