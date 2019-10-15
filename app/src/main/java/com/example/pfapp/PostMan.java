@@ -335,19 +335,12 @@ public class PostMan {
      * @param proj : id of the project
      * @param style : Size of the image
      */
-    public Drawable poster (int proj, posterSize style) {
+    public String poster (int proj, posterSize style) {
         String username = GetSharedPreferences("username", context);
         String token = GetSharedPreferences("token", context);
         String url = "https://" + IP + "/pfe/webservice.php?q=POSTR&user=" + username + "&proj=" +
                 proj + "&style=" + style + "&token=" + token;
-        //GetRequest(url, "POSTR");
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
-        } catch (Exception e) {
-            return null;
-        }
+        return url;
     }
 
 
