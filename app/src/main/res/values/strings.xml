@@ -11,7 +11,7 @@
     <string name="menu_agenda">Agenda</string>
     <string name="menu_plan">Plan</string>
     <string name="menu_accueil">Accueil</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_send">Deconnexion</string>
     <string name="name">Username</string>
     <string name="connect">Connect</string>
     <string name="visit">Visiteur</string>
@@ -21,5 +21,4 @@
     <string name="titre_agenda">Agenda :</string>
     <string name="error_credentials">Error Credentials</string>
     <string name="error_credentials_explication">Credentials that have been entered are wrong. Please check out.</string>
-
 </resources>

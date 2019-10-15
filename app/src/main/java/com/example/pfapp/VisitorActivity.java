@@ -36,8 +36,9 @@ public class VisitorActivity extends AppCompatActivity {
         projetRecycler.setAdapter(recyclerViewAdapter);
     }
 
-    public void profilDescription(){
+    public void profilDescription(String nameProject){
         Intent intent = new Intent(this, ProjetDescriptionActivity.class);
+        intent.putExtra("titleProject",nameProject);
         startActivity(intent);
     }
 }

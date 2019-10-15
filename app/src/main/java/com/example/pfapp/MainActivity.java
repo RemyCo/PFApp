@@ -13,14 +13,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.InflateException;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -111,8 +106,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void profilDescription(){
+    public void profilDescription(String nameProject){
         Intent intent = new Intent(this, ProjetDescriptionActivity.class);
+        intent.putExtra("titleProject",nameProject);
         startActivity(intent);
     }
 

@@ -37,7 +37,7 @@ public class ListOfAllProjects {
 
     public int projectNameIndexExists(String name){
         for (int indexExists = 0; indexExists != listOfProjects.size(); indexExists++){
-            if (listOfProjects.get(indexExists).getTitle() == name){
+            if (listOfProjects.get(indexExists).getTitle().equals(name)){
                 return indexExists;
             }
         }
