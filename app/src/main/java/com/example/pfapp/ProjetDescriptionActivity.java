@@ -9,7 +9,6 @@
 package com.example.pfapp;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -77,8 +76,6 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
         supervisor.setText(myProject.getSupervisor().getForename()+" "+myProject.getSupervisor().getSurname());
 
         poster = (ImageView) findViewById(R.id.poster);
-        //todo : poster
-        poster.setImageResource(R.drawable.eseo_couleurs);
 
         listStudent = myProject.getStudents();
 
@@ -89,7 +86,7 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
             student.add(listStudent.get(i).getSurname()+" "+listStudent.get(i).getForename());
         }
 
-        recyclerViewAdapter = new RecyclerViewAdapterStudent(student);
+        recyclerViewAdapter = new RecyclerViewAdapterStudent(student,this);
         projetRecycler.setAdapter(recyclerViewAdapter);
 
         buttonReturn = findViewById(R.id.buttonReturn);
@@ -110,9 +107,10 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
-        ImageView imageView = findViewById(R.id.view_poster); //TODO: Change view_poster
-        Drawable poster = PostMan.getInstance(getApplicationContext()).poster(1, PostMan.posterSize.FULL);
-        imageView.setImageDrawable(poster);
+    public void noteStudent(String nameStudient){
+        Intent intent = new Intent(ProjetDescriptionActivity.this, NoteActivity.class);
+        this.startActivity(intent);
     }
 }

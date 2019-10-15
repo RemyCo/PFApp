@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pfapp.ProjetDescriptionActivity;
 import com.example.pfapp.R;
 
 import java.util.List;
@@ -25,11 +26,13 @@ public class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerVie
 
     //TODO : changer pour le noms des projets
     private List<String> student;
+    private ProjetDescriptionActivity projetDescriptionActivity;
 
     private float radius = 20;
 
-    public RecyclerViewAdapterStudent(List<String> student) {
+    public RecyclerViewAdapterStudent(List<String> student, ProjetDescriptionActivity main) {
         this.student = student;
+        this.projetDescriptionActivity = main;
     }
 
     @NonNull
@@ -43,6 +46,12 @@ public class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerVie
     @Override
     public void onBindViewHolder(@NonNull final RecyclerViewHolder holder, final int position) {
         holder.NameStudent.setText(student.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                projetDescriptionActivity.noteStudent(student.get(position));
+            }
+        });
     }
 
     @Override
