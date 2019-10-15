@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void afterOnCreate(){
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -88,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Context context = getApplicationContext();
-        changeUserName(context);
     }
 
     @Override
@@ -113,24 +111,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Change the username on the navigation drawer
-     * @param context : context of the application
-     */
-    private void changeUserName(Context context) {
-        try {
-            LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-            View v = inflater.inflate(R.layout.nav_header_main, null);
-            TextView username = v.findViewById(R.id.nav_header);
-            SharedPreferences sharedpreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-            if (sharedpreferences.contains("username")) {
-                username.setText(sharedpreferences.getString("username", ""));
-            }
-        } catch (InflateException e) {
-            Log.d("blabla", "InflateException Error : " + e.getMessage());
-        }
-    }
-
     public void profilDescription(){
         Intent intent = new Intent(this, ProjetDescriptionActivity.class);
         startActivity(intent);
@@ -150,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         try {
             if (receiveString.equals("AllProjects")){
                 afterOnCreate();
+            } else if (receiveString.equals("myProjects")){
+                Log.d("blabla", "myProjects");
             } else {
                 Log.d("blabla", "An error occurs, receiveString not equals to something good");
             }

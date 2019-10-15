@@ -34,6 +34,29 @@ public class ListOfAllProjects {
         listOfProjects.add(project);
     }
 
+
+    public int projectNameIndexExists(String name){
+        for (int indexExists = 0; indexExists != listOfProjects.size(); indexExists++){
+            if (listOfProjects.get(indexExists).getTitle() == name){
+                return indexExists;
+            }
+        }
+        return 0;
+    }
+
+    public int projectIdIndexExists(int idProject){
+        for (int indexExists = 0; indexExists != listOfProjects.size(); indexExists++){
+            if (listOfProjects.get(indexExists).getId() == idProject){
+                return indexExists;
+            }
+        }
+        return 0;
+    }
+
+    public Project getProject(int index) {
+        return listOfProjects.get(index);
+    }
+
     public boolean projectExists(Project project){
         boolean exists = false;
         for (int indexExists = 0; indexExists != listOfProjects.size(); indexExists++){
@@ -47,10 +70,9 @@ public class ListOfAllProjects {
     public boolean projectIdExists(int idProject){
         boolean exists = false;
         for (int indexExists = 0; indexExists != listOfProjects.size(); indexExists++){
-            //TODO : enlever le commentaire et demander à remy
-            /*if (listOfProjects.get(indexExists).getIdProj() == idProject){
+            if (listOfProjects.get(indexExists).getId() == idProject){
                 exists = true;
-            }*/
+            }
         }
         return exists;
     }
