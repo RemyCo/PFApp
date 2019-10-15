@@ -56,9 +56,11 @@ public class ConnectionActivity extends AppCompatActivity {
     }
 
     protected void VerifyLOGON(){
+        Log.d("blabla", "VerifyLOGON : True");
         Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
         this.startActivity(intent);
     }
+
 
     protected void VerifyLOGONFalse(){
         showAlertDialogButtonClicked(this);

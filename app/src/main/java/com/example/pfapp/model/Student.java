@@ -8,7 +8,7 @@
 
 package com.example.pfapp.model;
 
-public class Student {
+public class Student extends User{
 
     private int id;
     private float mynote;
@@ -18,9 +18,8 @@ public class Student {
 
 
     public Student(int id, String forename, String surname) {
+        super(forename, surname);
         this.id = id;
-        this.forename = forename;
-        this.surname = surname;
     }
 
 

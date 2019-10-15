@@ -1,12 +1,12 @@
 /*
- * Class StudiantDao
+ * Class ProjetDao
  * Version 0.2
  * 08/10/2019
  * Author : Emilien TETU
  * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
  */
 
-package com.example.pfapp.model;
+package com.example.pfapp.model.DataBase;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -17,16 +17,16 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface StudiantDao {
-    @Query("SELECT * FROM StudentDB WHERE id_student = :idStudent")
-    List<StudentDB> getStudentList(int idStudent);
+public interface ProjetDao {
+    @Query("SELECT * FROM ProjectDB WHERE id_project = :idProject")
+    List<ProjectDB> getProjectList(int idProject);
 
     @Insert
-    void insertStudent(StudentDB student);
+    void insertProject(ProjectDB project);
 
     @Update
-    void updateStudent(StudentDB student);
+    void updateProject(ProjectDB project);
 
     @Delete
-    void deleteStudent(StudentDB student);
+    void deleteProject(ProjectDB project);
 }
