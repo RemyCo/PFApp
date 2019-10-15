@@ -53,8 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("blabla", "onClick: "+projetInformation.get(position));
-                mainActivity.profilDescription();
+                mainActivity.profilDescription(projetInformation.get(position));
             }
         });
     }
