@@ -23,7 +23,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 public class ConnectionActivity extends AppCompatActivity {
 
     private MyBroadcastReceiver receiver;

@@ -27,6 +27,7 @@ import java.util.List;
 public class ProjetDescriptionActivity extends AppCompatActivity {
 
     private Button buttonReturn;
+    private Button buttonNote;
     private RecyclerViewAdapterStudent recyclerViewAdapter;
 
     @Override
@@ -60,6 +61,15 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProjetDescriptionActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonNote = findViewById(R.id.buttonNote);
+        buttonNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProjetDescriptionActivity.this, NoteActivity.class);
                 startActivity(intent);
             }
         });
