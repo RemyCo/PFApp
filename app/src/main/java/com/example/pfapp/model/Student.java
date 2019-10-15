@@ -19,6 +19,8 @@ public class Student extends User{
 
     public Student(int id, String forename, String surname) {
         super(forename, surname);
+        this.forename = forename;
+        this.surname = surname;
         this.id = id;
     }
 

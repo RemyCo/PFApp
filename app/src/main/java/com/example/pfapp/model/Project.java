@@ -77,4 +77,11 @@ public class Project {
         this.supervisor = supervisor;
     }
 
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
+    }
 }

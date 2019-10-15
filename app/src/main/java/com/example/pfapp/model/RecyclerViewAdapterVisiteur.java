@@ -54,7 +54,7 @@ public class RecyclerViewAdapterVisiteur extends RecyclerView.Adapter<RecyclerVi
             @Override
             public void onClick(View v) {
                 Log.i("blabla", "onClick: "+projetInformation.get(position));
-                visitorActivity.profilDescription();
+                visitorActivity.profilDescription(projetInformation.get(position));
             }
         });
     }
