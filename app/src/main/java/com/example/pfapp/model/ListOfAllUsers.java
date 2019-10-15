@@ -8,66 +8,70 @@
 
 package com.example.pfapp.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class ListOfAllUsers {
 
-    private static ArrayList<User> listOfUsers;
+    private static ListOfAllUsers INSTANCE;
+    private static ArrayList<User> listOfUsers = new ArrayList<>();
 
-    public ListOfAllUsers(ArrayList<User> listOfUsers) {
-        this.listOfUsers = listOfUsers;
+    private ListOfAllUsers() {
+        // Private (Cause we are making a Singleton)
     }
 
-    public void setListOfUsers(ArrayList<User> listOfUsers) {
-        this.listOfUsers = listOfUsers;
+    public static synchronized ListOfAllUsers getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ListOfAllUsers();
+        }
+        return(INSTANCE);
     }
 
     public ArrayList<User> getListOfUsers() {
+
         return listOfUsers;
     }
 
 
     public User getUser(int index) {
+
         return listOfUsers.get(index);
     }
 
     public void addUser(User user){
+
         listOfUsers.add(user);
     }
 
     public boolean userExists(User user){
-        boolean exists = false;
-        for (int indexExists = 0; indexExists != listOfUsers.size(); indexExists++){
-            if (listOfUsers.contains(user)){
-                exists = true;
-            }
-        }
-        return exists;
+        return listOfUsers.contains(user);
     }
 
-
-    public boolean userNameExists(String forename, String surname){
-        boolean exists = false;
+    public int userIndexExists(User user){
         for (int indexExists = 0; indexExists != listOfUsers.size(); indexExists++){
-            if (listOfUsers.get(indexExists).getForename() == forename){
-                if (listOfUsers.get(indexExists).getSurname() == surname){
-                    exists = true;
-                }
+            if (listOfUsers.get(indexExists) == user){
+                return indexExists;
             }
         }
-        return exists;
+        return 0;
     }
 
 
     public int userNameExistIndex(String forename, String surname){
-        int index = 0;
         for (int indexExists = 0; indexExists != listOfUsers.size(); indexExists++){
-            if (listOfUsers.get(indexExists).getForename() == forename){
-                if (listOfUsers.get(indexExists).getSurname() == surname){
-                    index = indexExists;
+            try {
+                Log.d("blabla", listOfUsers.get(indexExists).getForename());
+                Log.d("blabla", listOfUsers.get(indexExists).getSurname());
+                if (listOfUsers.get(indexExists).getForename().equals(forename)){
+                    if (listOfUsers.get(indexExists).getSurname().equals(surname)){
+                        return indexExists;
+                    }
                 }
+            } catch (NullPointerException e){
+                Log.d("blabla","NullPointerExeption Error : " + e.getMessage());
             }
         }
-        return index;
+        return 0;
     }
 }

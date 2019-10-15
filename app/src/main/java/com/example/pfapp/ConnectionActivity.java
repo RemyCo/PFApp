@@ -23,7 +23,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.RequestQueue;
 
 public class ConnectionActivity extends AppCompatActivity {
 
@@ -58,9 +57,11 @@ public class ConnectionActivity extends AppCompatActivity {
     }
 
     protected void VerifyLOGON(){
+        Log.d("blabla", "VerifyLOGON : True");
         Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
         this.startActivity(intent);
     }
+
 
     protected void VerifyLOGONFalse(){
         showAlertDialogButtonClicked(this);

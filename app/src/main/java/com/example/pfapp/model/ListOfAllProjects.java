@@ -12,14 +12,18 @@ import java.util.ArrayList;
 
 public class ListOfAllProjects {
 
-    private static ArrayList<Project> listOfProjects;
+    private static ListOfAllProjects INSTANCE;
+    private static ArrayList<Project> listOfProjects = new ArrayList<>();
 
-    public ListOfAllProjects(ArrayList<Project> listOfProjects) {
-        this.listOfProjects = listOfProjects;
+    private ListOfAllProjects() {
+        // Private (Cause we are making a Singleton)
     }
 
-    public void setListOfProjects(ArrayList<Project> listOfProjects) {
-        this.listOfProjects = listOfProjects;
+    public static synchronized ListOfAllProjects getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ListOfAllProjects();
+        }
+        return(INSTANCE);
     }
 
     public ArrayList<Project> getListOfProjects() {

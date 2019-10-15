@@ -5,7 +5,7 @@
  * Author : Emilien TETU
  * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
  * 
- */package com.example.pfapp.model;
+ */package com.example.pfapp.model.DataBase;
 
 import android.content.Context;
 
