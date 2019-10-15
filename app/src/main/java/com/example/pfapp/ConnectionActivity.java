@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ConnectionActivity extends AppCompatActivity {
 
     private MyBroadcastReceiver receiver;
+    private boolean isReceiverRegistered;
 
     protected EditText username;
     private EditText password;
@@ -80,8 +81,24 @@ public class ConnectionActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        unregisterReceiver(receiver);
         super.onPause();
+        if (isReceiverRegistered) {
+            try {
+                unregisterReceiver(receiver);
+            } catch (IllegalArgumentException e) {
+                // Do nothing
+            }
+            isReceiverRegistered = false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isReceiverRegistered) {
+            registerReceiver(receiver, new IntentFilter(MyBroadcastReceiver.ACTION));
+            isReceiverRegistered = true;
+        }
     }
 
     protected class MyBroadcastReceiver extends BroadcastReceiver{

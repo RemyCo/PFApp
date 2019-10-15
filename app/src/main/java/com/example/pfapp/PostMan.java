@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.pfapp.model.ListOfAllProjects;
 import com.example.pfapp.model.ListOfAllUsers;
 import com.example.pfapp.model.Project;
+import com.example.pfapp.model.RequestsClass.MYPRJ;
 import com.example.pfapp.model.Student;
 import com.example.pfapp.model.User;
 
@@ -173,10 +174,24 @@ public class PostMan {
     }
 
     private void MYPRJRequest (String response){
+        Intent intent = new Intent();
+        intent.setAction(ConnectionActivity.MyBroadcastReceiver.ACTION);
         try {
+            MYPRJ myProjects = MYPRJ.getInstance();
             JSONObject jsonObj = new JSONObject(response);
             if  (!jsonObj.has("error")){
-
+                JSONArray jArray = jsonObj.getJSONArray("projects");
+                for(int i=0; i<jArray.length(); i++){
+                    JSONObject json_data = jArray.getJSONObject(i);
+                    if (projects.projectIdExists(json_data.getInt("projectId"))){
+                        int index = projects.projectIdIndexExists(json_data.getInt("projectId"));
+                        Project myProject = projects.getProject(index);
+                        myProjects.addMYPRJProject(myProject);
+                    } else {
+                        Log.d("blabla", "Error on MYPRJ REQUEST");
+                    }
+                }
+                intent.putExtra("dataToPass", "MyProjects");
             } else {
                 Log.d("blabla", "Error on Credentials");
             }

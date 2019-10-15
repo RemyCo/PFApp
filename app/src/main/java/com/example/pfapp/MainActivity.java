@@ -36,7 +36,7 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private MyBroadcastReceiver receiver;
-
+    private boolean isReceiverRegistered;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
     }
-
 
     private void afterOnCreate(){
         setContentView(R.layout.activity_main);
@@ -88,31 +87,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Context context = getApplicationContext();
-        changeUserName(context);
     }
-
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(receiver);
+        if (isReceiverRegistered) {
+            try {
+                unregisterReceiver(receiver);
+            } catch (IllegalArgumentException e) {
+                // Do nothing
+            }
+            isReceiverRegistered = false;
+        }
     }
 
-    /**
-     * Change the username on the navigation drawer
-     * @param context : context of the application
-     */
-    private void changeUserName(Context context) {
-        try {
-            LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-            View v = inflater.inflate(R.layout.nav_header_main, null);
-            TextView username = v.findViewById(R.id.nav_header);
-            SharedPreferences sharedpreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-            if (sharedpreferences.contains("username")) {
-                username.setText(sharedpreferences.getString("username", ""));
-            }
-        } catch (InflateException e) {
-            Log.d("blabla", "InflateException Error : " + e.getMessage());
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isReceiverRegistered) {
+            registerReceiver(receiver, new IntentFilter(MyBroadcastReceiver.ACTION));
+            isReceiverRegistered = true;
         }
     }
 
@@ -135,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         try {
             if (receiveString.equals("AllProjects")){
                 afterOnCreate();
+            } else if (receiveString.equals("myProjects")){
+                Log.d("blabla", "myProjects");
             } else {
                 Log.d("blabla", "An error occurs, receiveString not equals to something good");
             }
