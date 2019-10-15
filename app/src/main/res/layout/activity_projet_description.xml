@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView_accueil"
     android:layout_width="match_parent"
@@ -8,11 +9,9 @@
     android:fillViewport="true"
     tools:context=".ProjetDescriptionActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorLightBlue">
+        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/buttonReturn"
@@ -21,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintLeft_toRightOf="parent"
-            android:background="@color/colorLightBlue"
+            android:background="@color/colorOrange"
             android:textColor="@color/colorDark"
             android:text="RETOUR"
             >
@@ -51,16 +50,16 @@
             android:textSize="@dimen/paragrphe_taille"
             android:text="Description du projet dans sa globalité"
             android:textColor="@color/colorDark"
-                android:layout_marginTop="30dp"
+            android:layout_marginTop="30dp"
 
-                app:layout_constraintTop_toBottomOf="@+id/textTitreProjet"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintLeft_toRightOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/textTitreProjet"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent">
         </TextView>
 
         <TextView
-            android:id="@+id/textConfidentialProjet"
-            android:layout_width="match_parent"
+            android:id="@+id/ConfidentialProjet"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="textStart"
             android:textColor="@color/colorDark"
@@ -74,7 +73,23 @@
         </TextView>
 
         <TextView
-            android:id="@+id/textSuperiviseurProjet"
+            android:id="@+id/textConfidentialProjet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorDark"
+            android:textSize="@dimen/paragrphe_taille"
+            android:text="Low"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="160dp"
+
+            app:layout_constraintTop_toBottomOf="@+id/textDescriptionProjet"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/ConfidentialProjet">
+        </TextView>
+
+        <TextView
+            android:id="@+id/SuperiviseurProjet"
             android:layout_width="match_parent"
             android:textColor="@color/colorDark"
             android:layout_height="wrap_content"
@@ -82,6 +97,22 @@
             android:textSize="@dimen/paragrphe_taille"
             android:text="Superviseur : "
             android:layout_marginTop="5dp"
+
+            app:layout_constraintTop_toBottomOf="@+id/textConfidentialProjet"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent">
+        </TextView>
+
+        <TextView
+            android:id="@+id/textSuperiviseurProjet"
+            android:layout_width="match_parent"
+            android:textColor="@color/colorDark"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/paragrphe_taille"
+            android:text="supervideur 1"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="100dp"
 
             app:layout_constraintTop_toBottomOf="@+id/textConfidentialProjet"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -110,7 +141,7 @@
             app:layout_constraintTop_toBottomOf="@+id/rv_listEtudiant"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintLeft_toRightOf="parent"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="60dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             app:srcCompat="@drawable/eseo_couleurs"
@@ -118,7 +149,20 @@
 
         </ImageView>
 
+        <Button
+            android:id="@+id/buttonNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorDark"
+            android:background="@color/colorOrange"
+            android:textSize="10dp"
+            android:text="note"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
+        </Button>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
