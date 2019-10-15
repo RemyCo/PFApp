@@ -60,8 +60,9 @@ public class ProjetDescriptionActivity extends AppCompatActivity {
         buttonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProjetDescriptionActivity.this, MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
+                //Intent intent = new Intent(ProjetDescriptionActivity.this, MainActivity.class);
+                //startActivity(intent);
             }
         });
 

@@ -24,6 +24,7 @@ public class NoteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //TODO : requette pour la sauvegarde de la note
                 Intent intent = new Intent(NoteActivity.this, ProjetDescriptionActivity.class);
+                intent.putExtra("caller", "NoteActivity");
                 startActivity(intent);
             }
         });
