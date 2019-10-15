@@ -36,7 +36,7 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private MyBroadcastReceiver receiver;
-
+    private boolean isReceiverRegistered;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -91,11 +91,26 @@ public class MainActivity extends AppCompatActivity {
         changeUserName(context);
     }
 
-
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(receiver);
+        if (isReceiverRegistered) {
+            try {
+                unregisterReceiver(receiver);
+            } catch (IllegalArgumentException e) {
+                // Do nothing
+            }
+            isReceiverRegistered = false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isReceiverRegistered) {
+            registerReceiver(receiver, new IntentFilter(MyBroadcastReceiver.ACTION));
+            isReceiverRegistered = true;
+        }
     }
 
     /**
