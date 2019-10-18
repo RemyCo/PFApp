@@ -8,7 +8,6 @@
 
 package com.example.pfapp.model;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pfapp.MainActivity;
+import com.example.pfapp.ICallback;
 import com.example.pfapp.R;
 
 import java.util.ArrayList;
@@ -26,15 +25,14 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
 
-    private MainActivity mainActivity;
-    //TODO : changer pour le noms des projets
+    private ICallback callback;
     private List<String> projetInformation;
     private List<Integer> positions;
 
     private float radius = 50;
 
-    public RecyclerViewAdapter(ArrayList<String> array, MainActivity main) {
-        this.mainActivity = main;
+    public RecyclerViewAdapter(ArrayList<String> array, ICallback main) {
+        this.callback = main;
         this.projetInformation = array;
         positions = new ArrayList<>();
     }
@@ -53,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.profilDescription(projetInformation.get(position));
+               callback.callback(projetInformation.get(position));
             }
         });
     }

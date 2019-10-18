@@ -27,7 +27,6 @@ import java.util.List;
 public class RecyclerViewAdapterVisiteur extends RecyclerView.Adapter<RecyclerViewAdapterVisiteur.RecyclerViewHolder> {
 
     private VisitorActivity visitorActivity;
-    //TODO : changer pour le noms des projets
     private List<String> projetInformation;
     private List<Integer> positions;
 
