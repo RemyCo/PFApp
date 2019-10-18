@@ -28,7 +28,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainJuryActivity extends AppCompatActivity{
 
     private MyBroadcastReceiver receiver;
     private boolean isReceiverRegistered;
@@ -40,25 +40,28 @@ public class MainActivity extends AppCompatActivity {
         this.registerReceiver(receiver, new IntentFilter(ConnectionActivity.MyBroadcastReceiver.ACTION));
         Context context = getApplicationContext();
         PostMan.getInstance(context).ListofAllProjects();
+        Log.i("test", "onCreate: 1");
         super.onCreate(savedInstanceState);
     }
 
     private void afterOnCreate(){
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Log.i("test", "onCreate: 2");
+        setContentView(R.layout.activity_jury_main);
+        Toolbar toolbar = findViewById(R.id.toolbarJury);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        DrawerLayout drawer = findViewById(R.id.drawer_jury_layout);
+        NavigationView navigationView = findViewById(R.id.nav_jury_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_liste_projet, R.id.nav_mes_projets, R.id.nav_agenda,
+                R.id.nav_liste_projet, R.id.nav_mes_jurys, R.id.nav_agenda,
                 R.id.nav_plan, R.id.nav_accueil, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_jury_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        Log.i("test", "onCreate: 3");
     }
 
 
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_jury_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
@@ -103,12 +106,6 @@ public class MainActivity extends AppCompatActivity {
             registerReceiver(receiver, new IntentFilter(MyBroadcastReceiver.ACTION));
             isReceiverRegistered = true;
         }
-    }
-
-    public void profilDescription(String nameProject){
-        Intent intent = new Intent(this, ProjetDescriptionActivity.class);
-        intent.putExtra("titleProject",nameProject);
-        startActivity(intent);
     }
 
 

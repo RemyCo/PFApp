@@ -6,7 +6,7 @@
  * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
  */
 
-package com.example.pfapp.ui.mesProjets;
+package com.example.pfapp.ui.mesJurys;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,10 +24,11 @@ import com.example.pfapp.ICallback;
 import com.example.pfapp.ProjetDescriptionActivity;
 import com.example.pfapp.R;
 import com.example.pfapp.model.RecyclerViewAdapter;
+import com.example.pfapp.ui.mesProjets.GalleryViewModel;
 
 import java.util.ArrayList;
 
-public class MesProjetsFragment extends Fragment  implements ICallback {
+public class MesJurysFragment extends Fragment  implements ICallback {
 
     private GalleryViewModel galleryViewModel;
     private RecyclerViewAdapter recyclerViewAdapter;

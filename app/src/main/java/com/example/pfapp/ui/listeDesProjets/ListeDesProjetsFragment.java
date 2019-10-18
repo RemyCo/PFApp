@@ -8,6 +8,7 @@
 
 package com.example.pfapp.ui.listeDesProjets;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pfapp.MainActivity;
+import com.example.pfapp.ICallback;
+import com.example.pfapp.ProjetDescriptionActivity;
 import com.example.pfapp.R;
 import com.example.pfapp.model.ListOfAllProjects;
 import com.example.pfapp.model.Project;
@@ -27,7 +29,7 @@ import com.example.pfapp.model.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 
-public class ListeDesProjetsFragment extends Fragment {
+public class ListeDesProjetsFragment extends Fragment implements ICallback {
 
     private ShareViewModel shareViewModel;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -49,8 +51,15 @@ public class ListeDesProjetsFragment extends Fragment {
             projetInformation.add(ListOfProject.get(i).getTitle());
         }
 
-        recyclerViewAdapter = new RecyclerViewAdapter(projetInformation, (MainActivity) getActivity());
+        recyclerViewAdapter = new RecyclerViewAdapter(projetInformation, this);
         projetRecycler.setAdapter(recyclerViewAdapter);
         return root;
+    }
+
+    @Override
+    public void callback(String nameProject) {
+        Intent intent = new Intent(getActivity(), ProjetDescriptionActivity.class);
+        intent.putExtra("titleProject",nameProject);
+        startActivity(intent);
     }
 }

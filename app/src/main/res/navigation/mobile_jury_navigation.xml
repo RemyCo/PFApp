@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_accueil">
+
+    <fragment
+        android:id="@+id/nav_accueil"
+        android:name="com.example.pfapp.ui.home.HomeFragment"
+        android:label="@string/menu_accueil"
+        tools:layout="@layout/fragment_accueil" />
+
+    <fragment
+        android:id="@+id/nav_mes_jurys"
+        android:name="com.example.pfapp.ui.mesJurys.MesJurysFragment"
+        android:label="@string/menu_mes_jurys"
+        tools:layout="@layout/fragment_mes_projets" />
+
+    <fragment
+        android:id="@+id/nav_agenda"
+        android:name="com.example.pfapp.ui.agenda.AgendaFragment"
+        android:label="@string/menu_agenda"
+        tools:layout="@layout/fragment_agenda" />
+
+    <fragment
+        android:id="@+id/nav_plan"
+        android:name="com.example.pfapp.ui.plan.PlanFragment"
+        android:label="@string/menu_plan"
+        tools:layout="@layout/fragment_plan" />
+
+    <fragment
+        android:id="@+id/nav_liste_projet"
+        android:name="com.example.pfapp.ui.listeDesProjets.ListeDesProjetsFragment"
+        android:label="@string/menu_liste_projet"
+        tools:layout="@layout/fragment_liste_des_projets" />
+
+    <fragment
+        android:id="@+id/nav_send"
+        android:name="com.example.pfapp.ui.deconnexion.DeconnexionFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_send" />
+</navigation>

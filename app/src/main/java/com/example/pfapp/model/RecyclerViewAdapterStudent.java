@@ -24,7 +24,6 @@ import java.util.List;
 
 public class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapterStudent.RecyclerViewHolder> {
 
-    //TODO : changer pour le noms des projets
     private List<String> student;
     private ProjetDescriptionActivity projetDescriptionActivity;
 
