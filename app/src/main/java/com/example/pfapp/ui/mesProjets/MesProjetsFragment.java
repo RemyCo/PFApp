@@ -8,13 +8,17 @@
 
 package com.example.pfapp.ui.mesProjets;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,8 +26,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pfapp.ICallback;
 import com.example.pfapp.ProjetDescriptionActivity;
+import com.example.pfapp.MainActivity;
+import com.example.pfapp.PostMan;
 import com.example.pfapp.R;
 import com.example.pfapp.model.RecyclerViewAdapter;
+import com.example.pfapp.model.RequestsClass.MYPRJ;
 
 import java.util.ArrayList;
 
@@ -32,6 +39,8 @@ public class MesProjetsFragment extends Fragment  implements ICallback {
     private GalleryViewModel galleryViewModel;
     private RecyclerViewAdapter recyclerViewAdapter;
     private ArrayList<String> projetInformation = new ArrayList<>();
+    private MYPRJ myProjects = MYPRJ.getInstance();
+    private RecyclerView myProjectRecycler;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,15 +53,13 @@ public class MesProjetsFragment extends Fragment  implements ICallback {
         llm.setOrientation(RecyclerView.VERTICAL);
         projetRecycler.setLayoutManager(llm);
 
-        //TODO : ajouter la liste des projets "myProject"
+        this.myProjectRecycler = projetRecycler;
 
-        projetInformation.add("PROJET_1");
-        projetInformation.add("PROJET_2");
-        projetInformation.add("PROJET_3");
-        projetInformation.add("PROJET_4");
+        PostMan.getInstance(getContext()).ListofAllProjectsUser();
 
         recyclerViewAdapter = new RecyclerViewAdapter(projetInformation, this);
         projetRecycler.setAdapter(recyclerViewAdapter);
+
         return root;
     }
 
@@ -61,5 +68,15 @@ public class MesProjetsFragment extends Fragment  implements ICallback {
         Intent intent = new Intent(getActivity(), ProjetDescriptionActivity.class);
         intent.putExtra("titleProject",nameProject);
         startActivity(intent);
+    }
+
+    public void getMyProjects(){
+        projetInformation.clear();
+
+        for (int i=0; i<myProjects.getListOfProjects().size(); i++){
+            projetInformation.add(myProjects.getProject(i).getTitle());
+        }
+        recyclerViewAdapter.notifyDataSetChanged();
+
     }
 }

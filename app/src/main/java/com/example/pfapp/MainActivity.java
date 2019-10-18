@@ -21,11 +21,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.pfapp.ui.mesProjets.MesProjetsFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         PostMan.getInstance(context).ListofAllProjects();
         super.onCreate(savedInstanceState);
+    }
+
+    private void myProjects(){
+        Context context = getApplicationContext();
+        PostMan.getInstance(context).ListofAllProjectsUser();
     }
 
     private void afterOnCreate(){
@@ -125,8 +133,13 @@ public class MainActivity extends AppCompatActivity {
         try {
             if (receiveString.equals("AllProjects")){
                 afterOnCreate();
-            } else if (receiveString.equals("myProjects")){
-                Log.d("blabla", "myProjects");
+            } else if (receiveString.equals("MyProjects")){
+
+                FragmentManager fm = getSupportFragmentManager();
+                //if you added fragment via layout xml
+                MesProjetsFragment fragment = (MesProjetsFragment) fm.findFragmentById(R.id.rv_mesProjet);
+                fragment.getMyProjects();
+                Log.d("blabla", "MyProjects");
             } else {
                 Log.d("blabla", "An error occurs, receiveString not equals to something good");
             }
