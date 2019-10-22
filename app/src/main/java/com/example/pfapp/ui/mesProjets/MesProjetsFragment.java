@@ -24,6 +24,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pfapp.ICallback;
+import com.example.pfapp.ProjetDescriptionActivity;
 import com.example.pfapp.MainActivity;
 import com.example.pfapp.PostMan;
 import com.example.pfapp.R;
@@ -32,7 +34,7 @@ import com.example.pfapp.model.RequestsClass.MYPRJ;
 
 import java.util.ArrayList;
 
-public class MesProjetsFragment extends Fragment {
+public class MesProjetsFragment extends Fragment  implements ICallback {
 
     private GalleryViewModel galleryViewModel;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -55,10 +57,17 @@ public class MesProjetsFragment extends Fragment {
 
         PostMan.getInstance(getContext()).ListofAllProjectsUser();
 
-        recyclerViewAdapter = new RecyclerViewAdapter(projetInformation, (MainActivity) getActivity());
+        recyclerViewAdapter = new RecyclerViewAdapter(projetInformation, this);
         projetRecycler.setAdapter(recyclerViewAdapter);
 
         return root;
+    }
+
+    @Override
+    public void callback(String nameProject) {
+        Intent intent = new Intent(getActivity(), ProjetDescriptionActivity.class);
+        intent.putExtra("titleProject",nameProject);
+        startActivity(intent);
     }
 
     public void getMyProjects(){
@@ -70,5 +79,4 @@ public class MesProjetsFragment extends Fragment {
         recyclerViewAdapter.notifyDataSetChanged();
 
     }
-
 }

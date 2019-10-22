@@ -8,6 +8,7 @@
 
     <string name="menu_liste_projet">Liste des projets</string>
     <string name="menu_mes_projet">Mes Projets</string>
+    <string name="menu_mes_jurys">Mes Jurys</string>
     <string name="menu_agenda">Agenda</string>
     <string name="menu_plan">Plan</string>
     <string name="menu_accueil">Accueil</string>

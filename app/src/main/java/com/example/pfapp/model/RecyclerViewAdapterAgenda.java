@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapterAgenda extends RecyclerView.Adapter<RecyclerViewAdapterAgenda.RecyclerViewHolder> {
 
-    //TODO : changer pour le noms des projets
     private ArrayList<String> projects;
     private ArrayList<String> dateOfProject;
 
