@@ -61,9 +61,8 @@ public class ConnectionActivity extends AppCompatActivity {
         buttonVisit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //todo : demander à remy comment on fait pour la connexion du visiteur
-                Context context = getApplicationContext();
-                PostMan.getInstance(context).ConnectToServer(username, password);
+                Intent intent3 = new Intent(ConnectionActivity.this, VisitorActivity.class);
+                startActivity(intent3);
             }
         });
     }
@@ -73,14 +72,11 @@ public class ConnectionActivity extends AppCompatActivity {
 
         //todo : si c'est un jury alors selectionner le deuxième intent
 
-        Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
-        this.startActivity(intent);
+        //Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
+        //this.startActivity(intent);
 
         Intent intent2 = new Intent(ConnectionActivity.this, MainJuryActivity.class);
         this.startActivity(intent2);
-
-        Intent intent3 = new Intent(ConnectionActivity.this, VisitorActivity.class);
-        startActivity(intent3);
     }
 
 
