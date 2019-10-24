@@ -1,14 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView_accueil"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ProjetDescriptionActivity">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="NOUVEAU">
+        android:layout_height="match_parent">
 
-    </TextView>
+        <Button
+            android:id="@+id/buttonReturn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent"
+            android:background="@color/colorOrange"
+            android:textColor="@color/colorDark"
+            android:text="RETOUR"
+            >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </Button>
+
+        <TextView
+            android:id="@+id/textTitreProjet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorDark"
+            android:textSize="@dimen/titre_taille"
+            android:text="PROJET"
+            android:layout_marginTop="60dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent">
+        </TextView>
+
+        <TextView
+            android:id="@+id/textDescriptionProjet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/paragrphe_taille"
+            android:text="Description du projet dans sa globalité"
+            android:textColor="@color/colorDark"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/textTitreProjet"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent">
+        </TextView>
+
+        <TextView
+            android:id="@+id/ConfidentialProjet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorDark"
+            android:textSize="@dimen/paragrphe_taille"
+            android:text="Confidentialité : "
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+
+            app:layout_constraintTop_toBottomOf="@+id/textDescriptionProjet"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent">
+        </TextView>
+
+        <TextView
+            android:id="@+id/textConfidentialProjet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorDark"
+            android:textSize="@dimen/paragrphe_taille"
+            android:text="Low"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="160dp"
+
+            app:layout_constraintTop_toBottomOf="@+id/textDescriptionProjet"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/ConfidentialProjet">
+        </TextView>
+
+        <TextView
+            android:id="@+id/SuperiviseurProjet"
+            android:layout_width="match_parent"
+            android:textColor="@color/colorDark"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/paragrphe_taille"
+            android:text="Superviseur : "
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+
+            app:layout_constraintTop_toBottomOf="@+id/textConfidentialProjet"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent">
+        </TextView>
+
+        <TextView
+            android:id="@+id/textSuperiviseurProjet"
+            android:layout_width="match_parent"
+            android:textColor="@color/colorDark"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/paragrphe_taille"
+            android:text="supervideur 1"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="120dp"
+
+            app:layout_constraintTop_toBottomOf="@+id/textConfidentialProjet"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent">
+        </TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_listEtudiant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+
+            app:layout_constraintTop_toBottomOf="@+id/textSuperiviseurProjet"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <ImageView
+            android:id="@+id/poster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/rv_listEtudiant"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            >
+
+        </ImageView>
+
+        <EditText
+            android:id="@+id/commentaire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorDark"
+            android:textSize="10dp"
+            android:hint="Commentaire"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/poster"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+        </EditText>
+
+        <Button
+            android:id="@+id/buttonCommentaire"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:textColor="@color/colorDark"
+            android:background="@color/colorOrange"
+            android:textSize="5dp"
+            android:text="Ajouter"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/poster"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+        </Button>
+
+        <Button
+            android:id="@+id/buttonNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorDark"
+            android:background="@color/colorOrange"
+            android:textSize="10dp"
+            android:text="Note"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/commentaire"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+        </Button>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

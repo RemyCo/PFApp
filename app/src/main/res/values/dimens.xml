@@ -8,5 +8,7 @@
     <dimen name="titre">40dp</dimen>
     <dimen name="poster_accueil">400dp</dimen>
     <dimen name="titre_taille">30dp</dimen>
+    <dimen name="paragrphe_taille">15dp</dimen>
     <dimen name="titre_projet">100dp</dimen>
+    <dimen name="button">50dp</dimen>
 </resources>

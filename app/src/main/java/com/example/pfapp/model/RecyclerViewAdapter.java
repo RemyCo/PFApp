@@ -1,3 +1,11 @@
+/*
+ * Class RecyclerViewAdapter
+ * Version 0.2
+ * 08/10/2019
+ * Author : Emilien TETU
+ * Copyright CCBY 4.0 https://creativecommons.org/licenses/by/4.0/
+ */
+
 package com.example.pfapp.model;
 
 import android.view.LayoutInflater;
@@ -9,36 +17,23 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pfapp.ICallback;
 import com.example.pfapp.R;
-import com.example.pfapp.ui.share.ShareFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
 
-    private final ShareFragment shareFragment;
-    //TODO : changer pour le noms des projets
+    private ICallback callback;
     private List<String> projetInformation;
     private List<Integer> positions;
 
     private float radius = 50;
 
-    public RecyclerViewAdapter(ShareFragment shareFragment) {
-        this.shareFragment = shareFragment;
-        projetInformation = new ArrayList<>();
-        projetInformation.add("TEST1");
-        projetInformation.add("TEST2");
-        projetInformation.add("TEST3");
-        projetInformation.add("TEST4");
-        projetInformation.add("TEST5");
-        projetInformation.add("TEST6");
-        projetInformation.add("TEST7");
-        projetInformation.add("TEST8");
-        projetInformation.add("TEST9");
-        projetInformation.add("TEST10");
-        projetInformation.add("TEST11");
-        projetInformation.add("TEST12");
+    public RecyclerViewAdapter(ArrayList<String> array, ICallback main) {
+        this.callback = main;
+        this.projetInformation = array;
         positions = new ArrayList<>();
     }
 
@@ -56,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shareFragment.profilDescription();
+               callback.callback(projetInformation.get(position));
             }
         });
     }
@@ -71,7 +66,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private final TextView projetTitre;
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            projetTitre = itemView.findViewById(R.id.filmography_titre);
+            projetTitre = itemView.findViewById(R.id.projet_titre);
         }
     }
 }

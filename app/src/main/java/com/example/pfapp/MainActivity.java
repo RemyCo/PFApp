@@ -8,31 +8,50 @@
 
 package com.example.pfapp;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.View;
-import android.widget.TextView;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.pfapp.ui.mesProjets.MesProjetsFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MyBroadcastReceiver receiver;
+    private boolean isReceiverRegistered;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        receiver = new MyBroadcastReceiver();
+        this.registerReceiver(receiver, new IntentFilter(ConnectionActivity.MyBroadcastReceiver.ACTION));
+        Context context = getApplicationContext();
+        PostMan.getInstance(context).ListofAllProjects();
         super.onCreate(savedInstanceState);
+    }
+
+    private void myProjects(){
+        Context context = getApplicationContext();
+        PostMan.getInstance(context).ListofAllProjectsUser();
+    }
+
+    private void afterOnCreate(){
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,14 +88,64 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        /**
-        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.nav_header_main, null);
-        TextView username = v.findViewById(R.id.nav_header);
-        SharedPreferences sharedpreferences = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        if (sharedpreferences.contains("username")) {
-            username.setText(sharedpreferences.getString("username", ""));
-        }
-         **/ // Does not work, but have no time to make this working
+        Context context = getApplicationContext();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (isReceiverRegistered) {
+            try {
+                unregisterReceiver(receiver);
+            } catch (IllegalArgumentException e) {
+                // Do nothing
+            }
+            isReceiverRegistered = false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isReceiverRegistered) {
+            registerReceiver(receiver, new IntentFilter(MyBroadcastReceiver.ACTION));
+            isReceiverRegistered = true;
+        }
+    }
+
+    public void profilDescription(String nameProject){
+        Intent intent = new Intent(this, ProjetDescriptionActivity.class);
+        intent.putExtra("titleProject",nameProject);
+        startActivity(intent);
+    }
+
+
+    protected class MyBroadcastReceiver extends BroadcastReceiver {
+        public static final String ACTION = "com.example.ACTION_SOMETHING";
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String receiveString = intent.getStringExtra("dataToPass");
+            getFromReceiver(receiveString);
+        }
+    }
+
+    private void getFromReceiver(@Nullable String receiveString) {
+        try {
+            if (receiveString.equals("AllProjects")){
+                afterOnCreate();
+            } else if (receiveString.equals("MyProjects")){
+
+                FragmentManager fm = getSupportFragmentManager();
+                //if you added fragment via layout xml
+                MesProjetsFragment fragment = (MesProjetsFragment) fm.findFragmentById(R.id.rv_mesProjet);
+                fragment.getMyProjects();
+                Log.d("blabla", "MyProjects");
+            } else {
+                Log.d("blabla", "An error occurs, receiveString not equals to something good");
+            }
+        } catch (NullPointerException e){
+            Log.d("blabla", "Error :" + e.getMessage());
+        }
+    }
+
 }
