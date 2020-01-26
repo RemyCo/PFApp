@@ -1,6 +1,8 @@
 # PFApp
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/RemyCo/PFApp)
+[![License](https://img.shields.io/github/license/RemyCo/PFApp?color=red)](https://github.com/RemyCo/PFApp/blob/master/LICENSE)
+![GitHub top language](https://img.shields.io/github/languages/top/RemyCo/PFApp)
 
 ![pfeEmberORS](img/PFApp-Screen.jpg)
 
