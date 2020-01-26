@@ -1,10 +1,26 @@
 # PFApp
-App developped for an ESEO Android Project. Will be used on open days by the school
 
-# How to import the project ? 
+![GitHub last commit](https://img.shields.io/github/last-commit/RemyCo/PFApp)
 
-1. Un-zip the file downloaded. 
+![pfeEmberORS](img/PFApp-Screen.jpg)
 
-2. On Android Studio, click on "Open an existing Android Studio Project", and choose the file unzipped.
+App developped for an ESEO Android Project. Will be used on open days by the school. Application that can get the Final practicum of students in ESEO, Engineering school in Angers. This application can also mark projects, can see students on projects, and can mark the students.
 
-3. Click on Run 'app' at the right top of Android Studio
+## How to import the project ?
+
+### In Android studio :
+
+1. Open Android Studio
+
+2. Click on Check out project from Version Control
+
+3. Click on Git
+
+4. On URL, put https://github.com/RemyCo/PFApp
+
+### In files :
+
+```bash
+# Clone this repository
+$ git clone https://github.com/RemyCo/PFApp.git
+```
